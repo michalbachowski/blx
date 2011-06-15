@@ -7,7 +7,7 @@ class StaticFile {
     public function __construct( $file ) {
         $this->file = $file;
     }
-    public function update( sfEvent $event ) {
+    public function update( \sfEvent $event ) {
         if ( !file_exists( $this->file ) ) {
             return;
         }
