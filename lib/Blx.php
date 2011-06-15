@@ -29,11 +29,11 @@ function prepareArguments() {
     if ( isset( $_SERVER['argc'] ) && $_SERVER['argc'] > 0 ) {
         $args = $_SERVER['argv'];
         $url = isset( $args['url'] ) ? $args['url'] : '';
-        $method = Blx\Request::CLI;
+        $method = Request::CLI;
     } else {
         $args = array_merge( $_GET, (array) $_POST );
-        $url = $_GET['url'];
-        $method = $_POST ? Blx\Request::POST : Blx\Request::GET;
+        $url = isset( $_GET['url'] ) ? $_GET['url'] : '';
+        $method = $_POST ? Request::POST : Request::GET;
     }
     return array( $url, $args, $method );
 }
