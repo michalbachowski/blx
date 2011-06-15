@@ -8,7 +8,7 @@ class Error extends \Exception {}
 class UnsupportedMethodError extends \RuntimeException {
     public function __construct( $method ) {
         parent::__construct( sprintf(
-            'Method %s is unsupported',
+            _( 'Method %s is unsupported' ),
             $method
         ) );
     }
