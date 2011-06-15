@@ -1,6 +1,6 @@
 <?php
 
-require 'lib/Blx.php';
+require '../lib/Blx.php';
 
 # prepare arguments
 list( $url, $args, $method ) = Blx\prepareArguments();
@@ -14,10 +14,11 @@ $d->connect( 'dispatch.stop', array( $request, 'display' ) );
 $d->connect( 'handle.error', array( $request, 'handle404' ) );
 
 # aux plugins
+require 'plugins/StaticFile.php';
 $d->connect(
     'handle.get',
     array(
-        new Blx\Plugin\StaticFile( '/home/users/mib/blx/webroot/test.html' ),
+        new Blx\Plugin\StaticFile( 'webroot/test.html' ),
         'update'
     )
 );
