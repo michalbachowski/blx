@@ -6,3 +6,10 @@ create table pages (
     created timestamp without time zone not null default now(),
     user_id integer not null
 );
+
+create table pages_trace (
+    action char(1) not null,
+    created timestamp not null,
+    dbuser text NOT NULL,
+    like pages including defaults
+);
