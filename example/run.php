@@ -1,5 +1,4 @@
 <?php
-
 require '../lib/Blx.php';
 
 # prepare arguments
@@ -15,10 +14,56 @@ $d->connect( 'handle.error', array( $request, 'handle404' ) );
 
 # aux plugins
 require '../plugins/StaticFile.php';
+require '../plugins/FileFromDirectory.php';
+require '../plugins/DefaultUrl.php';
+require '../plugins/jb/Acl.php';
+require '../plugins/jb/Load.php';
+require '../plugins/jb/User.php';
+
+$d->connect(
+    'dispatch.start',
+    array(
+        new Blx\Plugin\Jb\Load( 'heroes' ),
+        'update'
+    )
+);
+
+$d->connect(
+    'dispatch.start',
+    array(
+        new Blx\Plugin\Jb\User(),
+        'update',
+    )
+);
+
+$d->connect(
+    'filter.url',
+    array(
+        new Blx\Plugin\DefaultUrl( 'index.html' ),
+        'filter'
+    )
+);
+
+$d->connect(
+    'filter.url',
+    array(
+        new Blx\Plugin\Jb\Acl( Blx\Plugin\Jb\Acl::ALLOW, array( 'test.html' => 1532 ) ),
+        'filter'
+    )
+);
+
 $d->connect(
     'handle.get',
     array(
-        new Blx\Plugin\StaticFile( 'webroot/test.html' ),
+        new Blx\Plugin\FileFromDirectory( dirname( __FILE__ ) . '/webroot/' ),
+        'update'
+    )
+);
+
+$d->connect(
+    'handle.get',
+    array(
+        new Blx\Plugin\StaticFile( dirname( __FILE__ ) . '/webroot/test.html' ),
         'update'
     )
 );
