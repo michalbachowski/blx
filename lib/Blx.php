@@ -137,6 +137,9 @@ class Request {
     }
 
     public function handle404( $event ) {
+        if ( !$event['exception'] instanceof Http404Error ) {
+            return;
+        }
         $event->setReturnValue( var_export(
             $event['exception']
         ) );
