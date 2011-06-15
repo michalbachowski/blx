@@ -18,21 +18,12 @@ require '../plugins/FileFromDirectory.php';
 require '../plugins/DefaultUrl.php';
 require '../plugins/jb/Acl.php';
 require '../plugins/jb/Load.php';
-require '../plugins/jb/User.php';
 
 $d->connect(
     'dispatch.start',
     array(
         new Blx\Plugin\Jb\Load( 'heroes' ),
         'update'
-    )
-);
-
-$d->connect(
-    'dispatch.start',
-    array(
-        new Blx\Plugin\Jb\User(),
-        'update',
     )
 );
 

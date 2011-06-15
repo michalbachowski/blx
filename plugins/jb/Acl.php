@@ -16,8 +16,7 @@ class Acl {
     public function filter( \sfEvent $event, $url ) {
         $allowGroup = null;
         $allowUser = null;
-        $args = $event->getSubject()->getArgs();
-        $user = $args['_user'];
+        $user = \JBCore::user();
         if ( isset( $this->groups[$url] ) ) {
             $allowGroup = \JBGroups::isIn( $this->groups[$url], $user );
         }
