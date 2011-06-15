@@ -14,7 +14,7 @@ $d->connect( 'dispatch.stop', array( $request, 'display' ) );
 $d->connect( 'handle.error', array( $request, 'handle404' ) );
 
 # aux plugins
-require 'plugins/StaticFile.php';
+require '../plugins/StaticFile.php';
 $d->connect(
     'handle.get',
     array(
