@@ -16,6 +16,7 @@ $d->connect( 'handle.error', array( $request, 'handle404' ) );
 require '../plugins/StaticFile.php';
 require '../plugins/FileFromDirectory.php';
 require '../plugins/DefaultUrl.php';
+require '../plugins/PrefixUrl.php';
 require '../plugins/jb/Acl.php';
 require '../plugins/jb/Load.php';
 
@@ -34,6 +35,16 @@ $d->connect(
         'filter'
     )
 );
+
+/**
+$d->connect(
+    'filter.url',
+    array(
+        new Blx\Plugin\PrefixUrl( '/h6/' ),
+        'filter'
+    )
+);
+ */
 
 $d->connect(
     'filter.url',
