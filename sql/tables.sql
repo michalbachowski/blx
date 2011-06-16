@@ -9,7 +9,6 @@ create table pages (
 
 create table pages_trace (
     action char(1) not null,
-    created timestamp not null,
     dbuser text NOT NULL,
     like pages including defaults
 );
