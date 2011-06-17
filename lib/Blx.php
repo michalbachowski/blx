@@ -84,25 +84,26 @@ class Request {
     public function dispatch() {
         # start dispatch
         $this->getDispatcher()->notify( new \sfEvent( $this, 'dispatch.start' ) );
+        # load content
+        $out = $this->loadContent( $this->getMethod(), $this->getUrl(), $this->getArgs() );
+        # display
+        $this->getDispatcher()->notify(
+            new \sfEvent( $this, 'dispatch.stop', array( 'output' => $out ) ) );
+    }
+
+    public function loadContent( $method, $url, array $args = array() ) {
         try {
             # prepare url and arguments
-            $url = $this->getDispatcher()->filter(
-                new \sfEvent( $this, 'filter.url' ),
-                $this->getUrl()
-            )->getReturnValue();
-            $args = $this->getDispatcher()->filter(
-                new \sfEvent( $this, 'filter.args' ),
-                $this->getArgs()
-            )->getReturnValue();
-
+            list( $url, $args ) = $this->filterUrlAndArgs( $url, $args );
             # handle request
             $event = $this->getDispatcher()->notifyUntil(
                 new \sfEvent(
                     $this,
-                    'handle.' . $this->getMethod(),
+                    sprintf( 'handle.%s', $method ),
                     array( 'url' => $url, 'arguments' => $args )
                 )
             );
+
             # no response - error
             if ( !$event->isProcessed() ) {
                 throw new Http404Error();
@@ -117,19 +118,31 @@ class Request {
             $event = $this->getDispatcher()->notifyUntil(
                 new \sfEvent( $this, 'handle.error', array( 'exception' => $e ) )
             );
+
             # no response - propagate error
             if ( !$event->isProcessed() ) {
                 throw $e;
             }
+
             # filter error response
             $out = $this->getDispatcher()->filter(
                 new \sfEvent( $this, 'filter.response.error'),
                 $event->getReturnValue()
             )->getReturnValue();
         }
-        # display
-        $this->getDispatcher()->notify(
-            new \sfEvent( $this, 'dispatch.stop', array( 'output' => $out ) ) );
+        return $out;
+    }
+
+    protected function filterUrlAndArgs( $url, array $args ) {
+        $url = $this->getDispatcher()->filter(
+            new \sfEvent( $this, 'filter.url' ),
+            $url
+        )->getReturnValue();
+        $args = $this->getDispatcher()->filter(
+            new \sfEvent( $this, 'filter.args' ),
+            $args
+        )->getReturnValue();
+        return array( $url, $args );
     }
 
     public function display( $event ) {
