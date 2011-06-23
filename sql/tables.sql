@@ -1,5 +1,6 @@
 create table pages (
     url varchar primary key,
+    realm varchar not null,
     title varchar not null,
     content text not null,
     medatada text,

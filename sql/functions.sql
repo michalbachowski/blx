@@ -1,11 +1,12 @@
 create or replace function set_page(
-    v_url_i varchar, v_title_i varchar, v_content_i text, v_metadata_i text default null )
+    v_url_i varchar, v_realm_i varchar, v_title_i varchar, v_content_i text, v_metadata_i text default null )
 returns boolean language 'plpgsql' as $$
 begin
     -- update page
     update
         pages
     set
+        realm = v_realm_i,
         title = v_title_i,
         content = v_content_i,
         metadata = v_metadata_i
@@ -20,11 +21,13 @@ begin
         pages
     (
         url,
+        realm,
         title,
         content,
         metadata
     ) values (
         v_url_i,
+        v_realm_i,
         v_title_i,
         v_content_i,
         v_metadata_i
