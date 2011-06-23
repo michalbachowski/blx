@@ -3,10 +3,10 @@ namespace Blx\Plugin;
 
 class StaticFile {
     protected $file;
+    protected $tag = '[content]';
 
-    public function __construct( $file, $tag = '[content]' ) {
+    public function __construct( $file ) {
         $this->file = $file;
-        $this->tag = $tag;
     }
     public function update( \sfEvent $event ) {
         if ( !file_exists( $this->file ) ) {
