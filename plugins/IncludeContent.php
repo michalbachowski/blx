@@ -2,7 +2,7 @@
 namespace Blx\Plugin;
 
 class IncludeContent {
-    protected $pattern = '!\{\{include\:(.+?)\}\}!';
+    protected $pattern = '!\[include\:(.+?)\]!';
 
     public function filter( \sfEvent $event, $content ) {
         $callback = function( $matches ) use ( $event ) {
