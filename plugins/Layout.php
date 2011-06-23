@@ -1,7 +1,7 @@
 <?php
 namespace Blx\Plugin;
 
-class StaticFile {
+class Layout {
     protected $file;
     protected $tag = '[content]';
 
