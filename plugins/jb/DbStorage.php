@@ -3,7 +3,15 @@ namespace Blx\Plugin\Jb;
 
 class DbStorage {
 
+    protected $cache = array();
+
     public function get( \sfEvent $event ) {
+        if ( !isset( $this->cache[$event['url']] ) ) {
+            $this->cache[$event['url']] = $this->fetchFromDb( $event['url'] );
+        }
+        return $this->cache[$event['url']];
+    }
+    protected function fetchFromDb( $url ) {
         $query = 'select get_page(:url);'
         $params = array( ':url' => $event['url'] );
         JBDB::instance()->queryParams( $query, $params );
