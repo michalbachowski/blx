@@ -9,7 +9,8 @@ class DbStorage {
         if ( !isset( $this->cache[$event['url']] ) ) {
             $this->cache[$event['url']] = $this->fetchFromDb( $event['url'] );
         }
-        return $this->cache[$event['url']];
+        $event->setReturnValue( $this->cache[$event['url']] );
+        return true;
     }
     protected function fetchFromDb( $url ) {
         $query = 'select get_page(:url);'
