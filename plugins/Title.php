@@ -31,10 +31,13 @@ class Title {
                 new \sfEvent(
                     $this,
                     'metadata.get',
-                    array( 'key' => 'title' ),
+                    array(
+                        'key' => 'title',
+                        'url' => $url
+                    ),
                 )
             );
-            # no response - "unknown"
+            # no response - set title to unknown"
             if ( !$event->isProcessed() ) {
                 $title = $unknown;
             } else {

@@ -21,10 +21,10 @@ class Metadata {
         if ( null === $this->data ) {
             $this->load();
         }
-        if ( !isset( $this->data[$event['key']] ) ) {
+        if ( !isset( $this->data[$event['url']][$event['key']] ) ) {
             return false;
         }
-        $event->setReturnValue( $this->cache[$event['key']] );
+        $event->setReturnValue( $this->data[$event['url']][$event['key']] );
         return true;
     }
 }
