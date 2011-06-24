@@ -105,6 +105,9 @@ class Request {
         try {
             # prepare url and arguments
             list( $url, $args ) = $this->filterUrlAndArgs( $url, $args );
+            if ( !$url ) {
+                throw new Http404Error();
+            }
             # handle request
             $event = $this->getDispatcher()->notifyUntil(
                 new \sfEvent(
