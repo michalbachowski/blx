@@ -83,7 +83,17 @@ class Request {
 
     public function dispatch() {
         # start dispatch
-        $this->getDispatcher()->notify( new \sfEvent( $this, 'dispatch.start' ) );
+        $this->getDispatcher()->notify(
+            new \sfEvent(
+                $this,
+                'dispatch.start',
+                array(
+                    'method' => $this->getMethod(),
+                    'url' => $this->getUrl(),
+                    'args' => $this->getArgs()
+                )
+            )
+        );
         # load content
         $out = $this->loadContent( $this->getMethod(), $this->getUrl(), $this->getArgs() );
         # display
