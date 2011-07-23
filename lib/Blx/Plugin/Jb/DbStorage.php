@@ -13,7 +13,11 @@ class DbStorage extends \Blx\Plugin {
         if ( !isset( $this->cache[$event['url']] ) ) {
             $this->cache[$event['url']] = $this->fetchFromDb( $event['url'] );
         }
-        $event->setReturnValue( $this->fetch( $event['url'] ) );
+        $data =  $this->fetch( $event['url'] );
+        if ( !$data ) {
+            return false;
+        }
+        $event->setReturnValue( $data['content'] );
         return true;
     }
     protected function fetch( $url ) {
@@ -28,6 +32,9 @@ class DbStorage extends \Blx\Plugin {
         $params = array( ':url' => $event['url'] );
         \JBDB::getInstance()->queryParams( $query, $params );
         $row = \JBDB::getInstance()->getNextRow();
+        if ( !$row ) {
+            return;
+        }
         $row['metadata'] = $row['metadata'] ? json_decode( $row['metadata'] ) : '';
         return $row;
     }
