@@ -1,8 +1,13 @@
 <?php
-require '../lib/Blx.php';
+error_reporting(E_ALL);
+set_include_path( get_include_path() . ':' . realpath( dirname( __FILE__ ) . '/../lib' ) );
+require 'Blx/Loader.php';
+require 'sf/sfEventDispatcher.php';
+
+spl_autoload_register( array( new Blx\Loader(), 'autoload' ) );
 
 # prepare arguments
-list( $url, $args, $method ) = Blx\prepareArguments();
+list( $url, $args, $method ) = Blx\Util::prepareArguments();
 
 # initiate request
 $request = new Blx\Request( $url, $args, $method );
@@ -11,14 +16,6 @@ $request = new Blx\Request( $url, $args, $method );
 $d = $request->getDispatcher();
 $d->connect( 'dispatch.stop', array( $request, 'display' ) );
 $d->connect( 'handle.error', array( $request, 'handle404' ) );
-
-# aux plugins
-require '../plugins/StaticFile.php';
-require '../plugins/FileFromDirectory.php';
-require '../plugins/DefaultUrl.php';
-require '../plugins/PrefixUrl.php';
-require '../plugins/jb/Acl.php';
-require '../plugins/jb/Load.php';
 
 $d->connect(
     'dispatch.start',
