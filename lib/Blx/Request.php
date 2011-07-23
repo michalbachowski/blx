@@ -86,6 +86,11 @@ class Request {
         );
         # load content
         $out = $this->loadContent( $this->getMethod(), $this->getUrl(), $this->getArgs() );
+        # filter content
+        $out = $this->getDispatcher()->filter(
+            new \sfEvent( $this, 'filter.output'),
+            $out
+        );
         # display
         $this->getDispatcher()->notify(
             new \sfEvent( $this, 'dispatch.stop', array( 'output' => $out ) ) );
