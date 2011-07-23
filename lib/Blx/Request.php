@@ -1,8 +1,6 @@
 <?php
 namespace Blx;
 
-require dirname( __FILE__ ) . '/sfEventDispatcher.php';
-
 class Error extends \Exception {}
 
 class UnsupportedMethodError extends \RuntimeException {
@@ -24,19 +22,6 @@ class Http403Error extends HttpError {}
 
 class ForbiddenError extends Http403Error {}
 
-
-function prepareArguments() {
-    if ( isset( $_SERVER['argc'] ) && $_SERVER['argc'] > 0 ) {
-        $args = $_SERVER['argv'];
-        $url = isset( $args['url'] ) ? $args['url'] : '';
-        $method = Request::CLI;
-    } else {
-        $args = array_merge( $_GET, (array) $_POST );
-        $url = isset( $_GET['url'] ) ? $_GET['url'] : '';
-        $method = $_POST ? Request::POST : Request::GET;
-    }
-    return array( $url, $args, $method );
-}
 
 class Request {
     const CLI = 'cli';
