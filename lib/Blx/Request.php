@@ -79,6 +79,26 @@ class Request {
         return $this;
     }
 
+    public function redirectToPage( $url ) {
+        $this->redirect(
+            $this->getUtil()->getCompleteUrl( $url )
+        );
+    }
+
+    public function redirect( $url ) {
+        header(
+            sprintf(
+                'Location: %s',
+                str_replace(
+                    array("\n", "\r"),
+                    '',
+                    $url
+                )
+            )
+        );
+        die();
+    }
+
     public function dispatch() {
         # start dispatch
         $this->getDispatcher()->notify(
