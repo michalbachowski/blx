@@ -3,8 +3,7 @@ namespace Blx\Plugin;
 
 class Layout extends \Blx\Plugin {
     protected $mapping = array(
-        'filter.response.normal' => 'update',
-        'filter.response.error' => 'update',
+        'filter.output' => 'filter',
     );
     protected $file;
     protected $tag = '[content]';
@@ -12,12 +11,11 @@ class Layout extends \Blx\Plugin {
     public function __construct( $file ) {
         $this->file = $file;
     }
-    public function update( \sfEvent $event ) {
+    public function filter( \sfEvent $event, $output ) {
         if ( !file_exists( $this->file ) ) {
-            return;
+            return $output;
         }
         $layout = file_get_contents( $this->file );
-        $event->setReturnVAlue( str_replace( $this->tag, $event['content'], $layout ) );
-        return true;
+        return str_replace( $this->tag, $output, $layout );
     }
 }
