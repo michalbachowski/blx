@@ -19,12 +19,16 @@ class Util {
         }
 
         if (  isset( $args['url'] ) ) {
-            $url = $args['url'];
+            $url = $this->fixInnerUrl( $args['url'] );
             unset( $args['url'] );
         } else {
             $url = '';
         }
         return array( $url, $args, $method );
+    }
+
+    public function fixInnerUrl( $url ) {
+        return rtrim( trim( $url, '/' ), '.html' ) . '.html';
     }
 
     public function getCompleteUrl( $url ) {
