@@ -3,7 +3,13 @@ namespace Blx;
 
 
 class Util {
-    public static function prepareArguments() {
+    protected $urlPattern;
+
+    public function __construct( $urlPattern ) {
+        $this->urlPattern = $urlPattern;
+    }
+
+    public function prepareArguments() {
         if ( isset( $_SERVER['argc'] ) && $_SERVER['argc'] > 0 ) {
             $args = $_SERVER['argv'];
             $url = isset( $args['url'] ) ? $args['url'] : '';
@@ -14,5 +20,9 @@ class Util {
             $method = $_POST ? Request::POST : Request::GET;
         }
         return array( $url, $args, $method );
+    }
+
+    public function getCompleteUrl( $url ) {
+        return sprintf( $this->urlPattern, $url );
     }
 }
