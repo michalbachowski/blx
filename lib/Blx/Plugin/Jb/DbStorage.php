@@ -5,7 +5,7 @@ class DbStorage extends \Blx\Plugin {
     protected $mapping = array(
         'handle.get' => 'get',
         'handle.post' => 'post',
-        'metadata.get' => 'update',
+        'metadata.get' => 'metadata',
     );
     protected $cache = array();
 
@@ -85,15 +85,15 @@ class DbStorage extends \Blx\Plugin {
         if ( !$data ) {
             return;
         }
-        if ( isset( $data[$url][$key] ) ) {
-            return $data[$url][$key];
+        if ( isset( $data[$key] ) ) {
+            return $data[$key];
         }
 
         if ( !is_array( $data['metadata'] ) ) {
             return;
         }
-        if ( isset( $data[$url]['metadata'][$key] ) ) {
-            return $data[$url]['metadata'][$key];
+        if ( isset( $data['metadata'][$key] ) ) {
+            return $data['metadata'][$key];
         }
     }
 }
