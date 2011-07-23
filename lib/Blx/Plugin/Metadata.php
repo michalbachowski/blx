@@ -1,7 +1,10 @@
 <?php
 namespace Blx\Plugin;
 
-class Metadata {
+class Metadata extends \Blx\Plugin {
+    protected $mapping = array(
+        'metadata.get' => 'update',
+    );
     protected $path;
     protected $data;
 

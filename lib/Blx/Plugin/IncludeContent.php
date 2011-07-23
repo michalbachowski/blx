@@ -1,7 +1,10 @@
 <?php
 namespace Blx\Plugin;
 
-class IncludeContent {
+class IncludeContent extends \Blx\Plugin  {
+    protected $mapping = array(
+        'filter.response.normal' => 'filter'
+    );
     protected $pattern = '!\[include\:(.+?)\]!';
 
     public function filter( \sfEvent $event, $content ) {

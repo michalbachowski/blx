@@ -1,7 +1,10 @@
 <?php
 namespace Blx\Plugin\Jb;
 
-class Acl {
+class Acl extends \Blx\Plugin {
+    protected $mapping = array(
+        'filter.url' => 'filter',
+    );
     const ALLOW = true;
     const DENY = false;
     protected $default;

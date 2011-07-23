@@ -1,7 +1,10 @@
 <?php
 namespace Blx\Plugin\Jb;
 
-class Load {
+class Load extends \Blx\Plugin {
+    protected $mapping = array(
+        'dispatch.start' => 'update'
+    );
     protected $realm;
 
     public function __construct( $realm ) {

@@ -1,7 +1,11 @@
 <?php
 namespace Blx\Plugin;
 
-class Layout {
+class Layout extends \Blx\Plugin {
+    protected $mapping = array(
+        'filter.response.normal' => 'update',
+        'filter.response.error' => 'update',
+    );
     protected $file;
     protected $tag = '[content]';
 

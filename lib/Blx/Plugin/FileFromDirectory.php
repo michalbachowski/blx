@@ -1,7 +1,10 @@
 <?php
 namespace Blx\Plugin;
 
-class FileFromDirectory {
+class FileFromDirectory extends \Blx\Plugin {
+    protected $mapping = array(
+        'handle.get' => 'update',
+    );
     protected $directory;
 
     public function __construct( $dir ) {

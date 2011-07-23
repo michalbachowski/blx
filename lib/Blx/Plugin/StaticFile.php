@@ -1,7 +1,10 @@
 <?php
 namespace Blx\Plugin;
 
-class StaticFile {
+class StaticFile extends \Blx\Plugin {
+    protected $mapping = array(
+        'handle.get' => 'update',
+    );
     protected $file;
 
     public function __construct( $file ) {

@@ -1,7 +1,12 @@
 <?php
 namespace Blx\Plugin;
 
-class Title {
+class Title extends \Blx\Plugin {
+    protected $mapping = array(
+        'filter.url' => 'filter_url',
+        'filter.output' => 'filter_output',
+    );
+
     protected $titlePattern = '[title]';
     protected $navPattern = '[navigation]';
 
@@ -19,7 +24,7 @@ class Title {
         }
     }
 
-    public function filter( \sfEvent $event, $baseUrl ) {
+    public function filter_url( \sfEvent $event, $baseUrl ) {
         $parts = explode( '/', trim( $baseUrl, '/' ) );
         $url = '';
         $unknown = __( 'Unknown' );
@@ -50,7 +55,7 @@ class Title {
         }
         return $baseUrl;
     }
-    public function filter( \sfEvent $event, $content ) {
+    public function filte_output( \sfEvent $event, $content ) {
         $title = '';
         $nav = '';
         foreach( $this->breadcrumbs as $crumb ) {

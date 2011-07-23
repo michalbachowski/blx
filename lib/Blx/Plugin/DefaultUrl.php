@@ -1,7 +1,10 @@
 <?php
 namespace Blx\Plugin;
 
-class DefaultUrl {
+class DefaultUrl extends \Blx\Plugin {
+    protected $mapping = array(
+        'filter.url'    => 'filter'
+    );
     protected $url;
 
     public function __construct( $url ) {

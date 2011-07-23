@@ -1,7 +1,11 @@
 <?php
 namespace Blx\Plugin;
 
-class PrefixUrl {
+class PrefixUrl extends \Blx\Plugin {
+    protected $mapping = array(
+        'filter.url' => 'filter',
+    );
+
     protected $prefix;
 
     public function __construct( $prefix ) {
