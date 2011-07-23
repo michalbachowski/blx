@@ -9,7 +9,7 @@ abstract class Plugin {
      */
     protected $mapping = array();
 
-    protected function register( \sfEventDispatcher $dispatcher ) {
+    public function register( \sfEventDispatcher $dispatcher ) {
         foreach( $this->mapping as $event => $method ) {
             $dispatcher->connect( $event, array( $this, $method ) );
         }
