@@ -33,6 +33,7 @@ class Request {
     protected $method;
     protected $dispatcher;
 
+
     public function __construct( $url, $args, $method = self::GET ) {
         if ( self::CLI != $method && self::GET != $method && self::POST != $method ) {
             throw new UnsupportedMethodError( $method );
@@ -143,17 +144,4 @@ class Request {
         return array( $url, $args );
     }
 
-    public function display( $event ) {
-        echo $event['output'];
-    }
-
-    public function handle404( $event ) {
-        if ( !$event['exception'] instanceof Http404Error ) {
-            return;
-        }
-        $event->setReturnValue( var_export(
-            $event['exception']
-        ) );
-        return true;
-    }
 }
