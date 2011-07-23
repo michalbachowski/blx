@@ -4,7 +4,7 @@ create table pages (
     title varchar not null,
     content text not null,
     medatada text,
-    created timestamp without time zone not null default now(),
+    created timestamp without time zone not null default now()
 );
 
 create table pages_trace (
