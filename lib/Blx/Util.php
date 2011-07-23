@@ -12,12 +12,17 @@ class Util {
     public function prepareArguments() {
         if ( isset( $_SERVER['argc'] ) && $_SERVER['argc'] > 0 ) {
             $args = $_SERVER['argv'];
-            $url = isset( $args['url'] ) ? $args['url'] : '';
             $method = Request::CLI;
         } else {
             $args = array_merge( $_GET, (array) $_POST );
-            $url = isset( $_GET['url'] ) ? $_GET['url'] : '';
             $method = $_POST ? Request::POST : Request::GET;
+        }
+
+        if (  isset( $args['url'] ) ) {
+            $url = $args['url'];
+            unset( $args['url'] );
+        } else {
+            $url = '';
         }
         return array( $url, $args, $method );
     }
