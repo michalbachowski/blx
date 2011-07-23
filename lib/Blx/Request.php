@@ -69,6 +69,7 @@ class Request {
 
     public function addPlugin( Plugin $plugin ) {
         $plugin->register( $this->getDispatcher() );
+        return $this;
     }
 
     public function dispatch() {
