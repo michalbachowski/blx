@@ -1,22 +1,33 @@
 <?php
 namespace Blx\Plugin\Jb;
 
-class DbStorage {
-
+class DbStorage extends \Blx\Plugin {
+    protected $mapping = array(
+        'handle.get' => 'get',
+        'handle.post' => 'post',
+        'metadata.get' => 'update',
+    );
     protected $cache = array();
 
     public function get( \sfEvent $event ) {
         if ( !isset( $this->cache[$event['url']] ) ) {
             $this->cache[$event['url']] = $this->fetchFromDb( $event['url'] );
         }
-        $event->setReturnValue( $this->cache[$event['url']] );
+        $event->setReturnValue( $this->fetch( $event['url'] ) );
         return true;
     }
+    protected function fetch( $url ) {
+        if ( !isset( $this->cache[$url] ) ) {
+            $this->cache[$url] = $this->fetchFromDb( $url );
+        }
+        return $this->cache[$url];
+    }
+
     protected function fetchFromDb( $url ) {
-        $query = 'select get_page(:url);'
+        $query = 'select get_page(:url);';
         $params = array( ':url' => $event['url'] );
-        JBDB::instance()->queryParams( $query, $params );
-        $row = JBDB::instance()->getNextRow();
+        \JBDB::getInstance()->queryParams( $query, $params );
+        $row = \JBDB::getInstance()->getNextRow();
         $row['metadata'] = $row['metadata'] ? json_decode( $row['metadata'] ) : '';
         return $row;
     }
@@ -30,19 +41,47 @@ class DbStorage {
             ':content'  => $event['arguments']['content'],
             ':metadata' => json_encode( $metadata )
         );
-        JBDB::instance()->queryParams( $query, $params );
+        \JBDB::getInstance()->queryParams( $query, $params );
     }
 
     protected function prepareMetadata( $metadata ) {
         foreach( $metadata as $key => $value ) {
             if ( 'title' === $key || 'content' === $key ) {
-                unset( $metadata );
+                unset( $metadata[$key] );
                 continue;
             }
             if ( '_' === $key{0} ) {
-                unset( $key );
+                unset( $metadata[$key] );
             }
         }
         return $metadata;
+    }
+
+    public function metadata( \sfEvent $event ) {
+        $value = $this->fetchMetadataValue(
+            $event['url'],
+            $event['key']
+        );
+        if ( !$value ) {
+            return false;
+        }
+        $event->setReturnValue( $value );
+        return true;
+    }
+    protected function fetchMetadataValue( $url, $key ) {
+        $data = $this->fetch( $url );
+        if ( !$data ) {
+            return;
+        }
+        if ( isset( $data[$url][$key] ) ) {
+            return $data[$url][$key];
+        }
+
+        if ( !is_array( $data['metadata'] ) ) {
+            return;
+        }
+        if ( isset( $data[$url]['metadata'][$key] ) ) {
+            return $data[$url]['metadata'][$key];
+        }
     }
 }
