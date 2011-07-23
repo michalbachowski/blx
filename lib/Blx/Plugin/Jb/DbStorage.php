@@ -24,7 +24,7 @@ class DbStorage extends \Blx\Plugin {
     }
 
     protected function fetchFromDb( $url ) {
-        $query = 'select get_page(:url);';
+        $query = 'select blx.get_page(:url);';
         $params = array( ':url' => $event['url'] );
         \JBDB::getInstance()->queryParams( $query, $params );
         $row = \JBDB::getInstance()->getNextRow();
@@ -33,7 +33,7 @@ class DbStorage extends \Blx\Plugin {
     }
 
     public function post( \sfEvent $event ) {
-        $query = 'select set_page(:url, :title, :content, :metadata);';
+        $query = 'select blx.set_page(:url, :title, :content, :metadata);';
         $metadata = $this->prepareMetadata( $event['arguments'] );
         $params = array(
             ':url'      => $event['url'],
