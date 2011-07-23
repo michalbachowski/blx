@@ -28,8 +28,8 @@ class DbStorage extends \Blx\Plugin {
     }
 
     protected function fetchFromDb( $url ) {
-        $query = 'select blx.get_page(:url);';
-        $params = array( ':url' => $event['url'] );
+        $query = 'select * from blx.get_page(:url);';
+        $params = array( ':url' => $url );
         \JBDB::getInstance()->queryParams( $query, $params );
         $row = \JBDB::getInstance()->getNextRow();
         if ( !$row ) {
