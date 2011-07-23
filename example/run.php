@@ -23,6 +23,7 @@ $request->addPlugin( new Blx\Plugin\DefaultUrl( 'index.html' ) )
     ->addPlugin( new Blx\Plugin\Error404() )
     ->addPlugin( new Blx\Plugin\Layout( dirname( __FILE__ ) . '/layout/default.html' ) )
     ->addPlugin( new Blx\Plugin\Title( 'Heroes VI, Behemot`s Lair' ) )
+    ->addPlugin( new Blx\Plugin\Jb\Ui() )
     ->addPlugin( new Blx\Plugin\Display() )
 ;
 # dispatch
