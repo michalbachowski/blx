@@ -3,7 +3,7 @@ create table pages (
     realm varchar not null,
     title varchar not null,
     content text not null,
-    medatada text,
+    metadata text,
     created timestamp without time zone not null default now()
 );
 
