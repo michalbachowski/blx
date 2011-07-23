@@ -28,19 +28,26 @@ class Request {
     const POST = 'post';
     const GET = 'get';
 
+    protected $util;
     protected $url;
     protected $args;
     protected $method;
     protected $dispatcher;
 
 
-    public function __construct( $url, $args, $method = self::GET ) {
+    public function __construct( Util $util ) {
+        list( $url, $args, $method ) = $util->prepareArguments();
         if ( self::CLI != $method && self::GET != $method && self::POST != $method ) {
             throw new UnsupportedMethodError( $method );
         }
+        $this->util = $util;
         $this->url = $url;
         $this->args = $args;
         $this->method = $method;
+    }
+
+    public function getUtil() {
+        return $this->util;
     }
 
     public function getDispatcher() {
