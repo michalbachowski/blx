@@ -3,19 +3,21 @@ namespace Blx\Plugin;
 
 class Title extends \Blx\Plugin {
     protected $mapping = array(
-        'filter.url' => 'filter_url',
+        'dispatch.start' => 'filter_url',
         'filter.output' => 'filter_output',
     );
 
     protected $titlePattern = '[title]';
     protected $navPattern = '[navigation]';
 
+    protected $titleSuffix;
     protected $breadcrumbs = array();
 
     protected $navTag = '<li><a href="%s">%s</a></li>';
     protected $navWrap = '<ul>%s</ul>';
 
-    public function __construct( $tag = null, $wrap = null ) {
+    public function __construct( $titleSuffix, $tag = null, $wrap = null ) {
+        $this->titleSuffix = _( $titleSuffix );
         if ( $tag ) {
             $this->navTag = $tag;
         }
@@ -24,47 +26,53 @@ class Title extends \Blx\Plugin {
         }
     }
 
-    public function filter_url( \sfEvent $event, $baseUrl ) {
-        $parts = explode( '/', trim( $baseUrl, '/' ) );
+    public function filter_url( \sfEvent $event ) {
+        $parts = explode( '/', trim( $event['url'], '/' ) );
         $url = '';
-        $unknown = __( 'Unknown' );
 
         foreach( $parts as $part ) {
-            $url .= '/' . $part;
+            $url .= $event->getSubject()->getUtil()->fixInnerUrl( '/' . $part );
             # fetch title
-            $event = $event->getSubject()->getDispatcher()->notifyUntil(
-                new \sfEvent(
-                    $this,
-                    'metadata.get',
-                    array(
-                        'key' => 'title',
-                        'url' => $url
-                    ),
-                )
-            );
-            # no response - set title to unknown"
-            if ( !$event->isProcessed() ) {
-                $title = $unknown;
-            } else {
-                $title = $event->getReturnValue();
-            }
             $this->breadcrumbs[] = array(
                 'url' => $url,
-                'title' => $title
+                'title' => $this->fetchTitle( $url, $event )
             );
         }
-        return $baseUrl;
     }
-    public function filte_output( \sfEvent $event, $content ) {
+
+    protected function fetchTitle( $url, \sfEvent $event ) {
+        $titleEvent = $event->getSubject()->getDispatcher()->notifyUntil(
+            new \sfEvent(
+                $this,
+                'metadata.get',
+                array(
+                    'key' => 'title',
+                    'url' => $url
+                )
+            )
+        );
+        # no response - set title to unknown"
+        if ( !$titleEvent->isProcessed() ) {
+            return _( 'Unknown' );
+        }
+        return $titleEvent->getReturnValue();
+    }
+
+    public function filter_output( \sfEvent $event, $content ) {
         $title = '';
         $nav = '';
         foreach( $this->breadcrumbs as $crumb ) {
-            $nav .= sprintf( $this->navTag, $crumb['url'], $crumb['title'] );
+            $nav .= sprintf(
+                $this->navTag,
+                $event->getSubject()->getUtil()->getCompleteUrl( $crumb['url'] ),
+                $crumb['title']
+            );
             $title .= $crumb['title'] . ', ';
         }
+        $title .= $this->titleSuffix;
         $nav = sprintf( $this->navWrap, $nav );
-        $content = str_replace( $this->titleTag, $title, $content );
-        $content = str_replace( $this->navTag, $nav, $content );
+        $content = str_replace( $this->titlePattern, $title, $content );
+        $content = str_replace( $this->navPattern, $nav, $content );
         return $content;
     }
 }
