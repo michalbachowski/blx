@@ -12,60 +12,15 @@ list( $url, $args, $method ) = Blx\Util::prepareArguments();
 # initiate request
 $request = new Blx\Request( $url, $args, $method );
 
-# load basic output plugin (yes, request is also output plugin)
-$d = $request->getDispatcher();
-$d->connect( 'dispatch.stop', array( $request, 'display' ) );
-$d->connect( 'handle.error', array( $request, 'handle404' ) );
-
-$d->connect(
-    'dispatch.start',
-    array(
-        new Blx\Plugin\Jb\Load( 'heroes' ),
-        'update'
-    )
-);
-
-$d->connect(
-    'filter.url',
-    array(
-        new Blx\Plugin\DefaultUrl( 'index.html' ),
-        'filter'
-    )
-);
-
-/**
-$d->connect(
-    'filter.url',
-    array(
-        new Blx\Plugin\PrefixUrl( '/h6/' ),
-        'filter'
-    )
-);
- */
-
-$d->connect(
-    'filter.url',
-    array(
-        new Blx\Plugin\Jb\Acl( Blx\Plugin\Jb\Acl::ALLOW, array( 'test.html' => 1532 ) ),
-        'filter'
-    )
-);
-
-$d->connect(
-    'handle.get',
-    array(
-        new Blx\Plugin\FileFromDirectory( dirname( __FILE__ ) . '/webroot/' ),
-        'update'
-    )
-);
-
-$d->connect(
-    'handle.get',
-    array(
-        new Blx\Plugin\StaticFile( dirname( __FILE__ ) . '/webroot/test.html' ),
-        'update'
-    )
-);
+# load basic output plugins
+$request->addPlugin( new Blx\Plugin\DefaultUrl( 'index.html' ) );
+$request->addPlugin( new Blx\Plugin\Jb\Load( 'heroes' ) );
+$request->addPlugin( new Blx\Plugin\Jb\Acl( Blx\Plugin\Jb\Acl::ALLOW, array( 'test.html' => 1532 ) ) );
+#$request->addPlugin( new Blx\Plugin\Jb\DbStorage() );
+$request->addPlugin( new Blx\Plugin\StaticFile( dirname( __FILE__ ) . '/pages/index.html' ) );
+# $request->addPlugin( new Blx\Plugin\Editable() );
+$request->addPlugin( new Blx\Plugin\Display() );
+$request->addPlugin( new Blx\Plugin\Error404() );
 
 # dispatch
 $request->dispatch();
