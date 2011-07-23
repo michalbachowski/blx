@@ -16,9 +16,9 @@ $request = new Blx\Request( $url, $args, $method );
 $request->addPlugin( new Blx\Plugin\DefaultUrl( 'index.html' ) );
 $request->addPlugin( new Blx\Plugin\Jb\Load( 'heroes' ) );
 $request->addPlugin( new Blx\Plugin\Jb\Acl( Blx\Plugin\Jb\Acl::ALLOW, array( 'test.html' => 1532 ) ) );
+$request->addPlugin( new Blx\Plugin\Editable() );
 #$request->addPlugin( new Blx\Plugin\Jb\DbStorage() );
 $request->addPlugin( new Blx\Plugin\StaticFile( dirname( __FILE__ ) . '/pages/index.html' ) );
-# $request->addPlugin( new Blx\Plugin\Editable() );
 $request->addPlugin( new Blx\Plugin\Display() );
 $request->addPlugin( new Blx\Plugin\Error404() );
 
