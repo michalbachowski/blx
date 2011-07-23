@@ -13,14 +13,16 @@ list( $url, $args, $method ) = Blx\Util::prepareArguments();
 $request = new Blx\Request( $url, $args, $method );
 
 # load basic output plugins
-$request->addPlugin( new Blx\Plugin\DefaultUrl( 'index.html' ) );
-$request->addPlugin( new Blx\Plugin\Jb\Load( 'heroes' ) );
-$request->addPlugin( new Blx\Plugin\Jb\Acl( Blx\Plugin\Jb\Acl::ALLOW, array( 'test.html' => 1532 ) ) );
-$request->addPlugin( new Blx\Plugin\Editable() );
-#$request->addPlugin( new Blx\Plugin\Jb\DbStorage() );
-$request->addPlugin( new Blx\Plugin\StaticFile( dirname( __FILE__ ) . '/pages/index.html' ) );
-$request->addPlugin( new Blx\Plugin\Display() );
-$request->addPlugin( new Blx\Plugin\Error404() );
-
+$request->addPlugin( new Blx\Plugin\DefaultUrl( 'index.html' ) )
+    ->addPlugin( new Blx\Plugin\Jb\Load( 'heroes' ) )
+#    ->addPlugin( new Blx\Plugin\ForbidRequest( '!^/template/!' ) )
+    ->addPlugin( new Blx\Plugin\Jb\Acl( Blx\Plugin\Jb\Acl::ALLOW, array( 'test.html' => 1532 ) ) )
+    ->addPlugin( new Blx\Plugin\Editable() )
+#    ->addPlugin( new Blx\Plugin\Jb\DbStorage() )
+    ->addPlugin( new Blx\Plugin\StaticFile( dirname( __FILE__ ) . '/pages/index.html' ) )
+    ->addPlugin( new Blx\Plugin\Error404() )
+    ->addPlugin( new Blx\Plugin\Layout( dirname( __FILE__ ) . '/layout/default.html' ) )
+    ->addPlugin( new Blx\Plugin\Display() )
+;
 # dispatch
 $request->dispatch();
