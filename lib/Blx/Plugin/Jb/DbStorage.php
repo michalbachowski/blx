@@ -40,10 +40,11 @@ class DbStorage extends \Blx\Plugin {
     }
 
     public function post( \sfEvent $event ) {
-        $query = 'select blx.set_page(:url, :title, :content, :metadata);';
+        $query = 'select blx.set_page(:url, :realm, :title, :content, :metadata);';
         $metadata = $this->prepareMetadata( $event['arguments'] );
         $params = array(
             ':url'      => $event['url'],
+            ':realm'    => JB_REALM,
             ':title'    => $event['arguments']['title'],
             ':content'  => $event['arguments']['content'],
             ':metadata' => json_encode( $metadata )
@@ -53,7 +54,7 @@ class DbStorage extends \Blx\Plugin {
 
     protected function prepareMetadata( $metadata ) {
         foreach( $metadata as $key => $value ) {
-            if ( 'title' === $key || 'content' === $key ) {
+            if ( 'title' === $key || 'content' === $key || 'realm' === $key) {
                 unset( $metadata[$key] );
                 continue;
             }
