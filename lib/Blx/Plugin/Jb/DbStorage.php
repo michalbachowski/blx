@@ -40,6 +40,10 @@ class DbStorage extends \Blx\Plugin {
     }
 
     public function post( \sfEvent $event ) {
+        $this->storeIntoDb( $event );
+        $event->getSubject()->redirectToPage( $event['url'] );
+    }
+    protected function storeIntoDb( \sfEvent $event ) {
         $query = 'select blx.set_page(:url, :realm, :title, :content, :metadata);';
         $metadata = $this->prepareMetadata( $event['arguments'] );
         $params = array(
