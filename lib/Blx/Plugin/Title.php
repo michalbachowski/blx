@@ -32,7 +32,7 @@ class Title extends \Blx\Plugin {
         foreach( $parts as $part ) {
             $url .= '/' . $part;
             # fetch title
-            $event = $this->getDispatcher()->notifyUntil(
+            $event = $event->getSubject()->getDispatcher()->notifyUntil(
                 new \sfEvent(
                     $this,
                     'metadata.get',
