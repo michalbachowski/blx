@@ -18,7 +18,7 @@ returns boolean language 'plpgsql' security definer as $$
 begin
     -- update page
     update
-        pages
+        blx.pages
     set
         realm = v_realm_i,
         title = v_title_i,
