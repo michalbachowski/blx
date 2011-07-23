@@ -8,8 +8,59 @@ class Editable extends \Blx\Plugin {
     );
     protected $insideLoop = false;
     protected $content = '';
-    protected $editor = '<textarea id="content">[raw_content]</textarea>';
 
+    private function getForm( $event ) {
+        $form = <<<EOF
+<form method="post" action="%s">
+    <div class="text">
+        <label for="title">%s</label>
+        <input type="text" name="title" id="title" value="%s" />
+    </div>
+    <div class="textarea">
+        <label for="content">%s</label>
+        <textarea id="content" name="content">[raw_content]</textarea>
+    </div>
+    <div class="submit">
+        <input type="submit" value="%s" />
+    </div>
+</form>
+EOF;
+        return sprintf(
+            $form,
+            $event->getSubject()->getUtil()->getCompleteUrl( $event['url'] ),
+            _( 'Title' ),
+            $this->getTitle( $event ),
+            _( 'Content' ),
+            _( 'Save' )
+        );
+    }
+
+    protected function getEditor( \sfEvent $event ) {
+        return $event->getSubject()->getDispatcher()->filter(
+            new \sfEvent(
+                $this,
+                'plugin.editable.filter.form'
+            ),
+            $this->getForm( $event )
+        )->getReturnValue();
+    }
+
+    protected function getTitle( \sfEvent $event ) {
+        $titleEvent = $event->getSubject()->getDispatcher()->notifyUntil(
+            new \sfEvent(
+                $this,
+                'metadata.get',
+                array(
+                    'key' => 'title',
+                    'url' => $event['url']
+                )
+            )
+        );
+        if ( !$titleEvent->isProcessed() ) {
+            return '';
+        }
+        return $titleEvent->getReturnValue();
+    }
 
     public function get( \sfEvent $event ) {
         if ( $this->insideLoop ) {
@@ -24,7 +75,7 @@ class Editable extends \Blx\Plugin {
         if ( $event->isProcessed() ) {
             $this->content = $event->getReturnValue();
         }
-        $event->setReturnValue( $this->editor );
+        $event->setReturnValue( $this->getEditor( $event ) );
         return true;
     }
 
