@@ -28,7 +28,11 @@ class Util {
     }
 
     public function fixInnerUrl( $url ) {
-        return rtrim( trim( $url, '/' ), '.html' ) . '.html';
+        $url = rtrim( trim( $url, '/' ), '.html' );
+        if ( !$url ) {
+            $url = 'index';
+        }
+        return $url . '.html';
     }
 
     public function getCompleteUrl( $url ) {
