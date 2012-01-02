@@ -31,11 +31,12 @@ class Title extends \Blx\Plugin {
         $url = '';
 
         foreach( $parts as $part ) {
-            $url .= $event->getSubject()->getUtil()->fixInnerUrl( '/' . $part );
+            $url .= '/' . $part;
+            $tmpUrl = $event->getSubject()->getUtil()->fixInnerUrl( $url );
             # fetch title
             $this->breadcrumbs[] = array(
-                'url' => $url,
-                'title' => $this->fetchTitle( $url, $event )
+                'url' => $tmpUrl,
+                'title' => $this->fetchTitle( $tmpUrl, $event )
             );
         }
     }
@@ -67,7 +68,7 @@ class Title extends \Blx\Plugin {
                 $event->getSubject()->getUtil()->getCompleteUrl( $crumb['url'] ),
                 $crumb['title']
             );
-            $title .= $crumb['title'] . ', ';
+            $title = $crumb['title'] . ', ' . $title;
         }
         $title .= $this->titleSuffix;
         $nav = sprintf( $this->navWrap, $nav );
