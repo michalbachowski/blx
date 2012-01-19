@@ -33,8 +33,8 @@ class Acl extends \Blx\Plugin {
         if ( self::ALLOW === $allowGroup || self::ALLOW === $allowUser ) {
             return $url;
         }
-        throw new \Blx\ForbiddenError( _(
-            'You are not allowed to acces this page.'
-        ) );
+        throw new \Blx\ForbiddenError(
+            _( 'You are not allowed to acces this page.' )
+        );
     }
 }
