@@ -13,7 +13,6 @@ class Load extends \Blx\Plugin {
 
     public function update( \sfEvent $event ) {
         define( 'JB_REALM', $this->realm );
-        define( 'JB_DATABASE', true );
         define( 'JB_DEBUG', 1 );
         require 'jbcore/jbcore.php';
     }
