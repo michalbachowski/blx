@@ -8,31 +8,24 @@ class Acl extends \Blx\Plugin {
     const ALLOW = true;
     const DENY = false;
     protected $default;
-    protected $groups;
-    protected $users;
 
-    public function __construct( $default = self::DENY, array $groups = array(), array $users = array() ) {
+    public function __construct( $default = self::DENY ) {
         $this->default = $default;
-        $this->groups = $groups;
-        $this->users = $users;
     }
+
     public function filter( \sfEvent $event, $url ) {
-        $allowGroup = null;
-        $allowUser = null;
-        $user = \JBCore::user();
-        if ( isset( $this->groups[$url] ) ) {
-            $allowGroup = \JBGroups::isIn( $this->groups[$url], $user );
-        }
-        if ( isset( $this->users[$url] ) ) {
-            $allowUser = in_array( $user, $this->users[$url] );
-        }
-        if ( null === $allowGroup && null === $allowUser ) {
-            $allowGroup = $this->default;
-            $allowUser = $this->default;
-        }
-        if ( self::ALLOW === $allowGroup || self::ALLOW === $allowUser ) {
+        $args = array( 'event' => $event, 'url' => $url );
+        $allowGlobal = \JBPerm::verify( $this, 'perm.' . JB_REALM, $args );
+        $allowPage = \JBPerm::verify( $this, 'perm.page.' . $url, $args );
+        // an event was verified positively
+        if ( $allowGlobal || $allowPage ) {
             return $url;
         }
+        // no event was processed (no policies defined) - use default value
+        if ( null === $allowGlobal && null === $allowPage && $this->default ) {
+            return $url;
+        }
+        // access denied
         throw new \Blx\ForbiddenError(
             _( 'You are not allowed to acces this page.' )
         );
