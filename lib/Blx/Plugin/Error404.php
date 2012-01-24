@@ -7,11 +7,12 @@ class Error404 extends \Blx\Plugin {
     );
 
     public function handle404( $event ) {
-        if ( !$event['exception'] instanceof Http404Error ) {
+        if ( !$event['exception'] instanceof \Blx\Http404Error ) {
             return;
         }
         $event->setReturnValue( var_export(
-            $event['exception']
+            $event['exception'],
+            true
         ) );
         return true;
     }
