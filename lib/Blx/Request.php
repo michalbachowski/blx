@@ -81,7 +81,7 @@ class Request {
 
     public function redirectToPage( $url ) {
         $this->redirect(
-            $this->getUtil()->getCompleteUrl( $url )
+            $this->getUtil()->getCompleteUrl( $this->getUtil()->fixInnerUrl( $url ) )
         );
     }
 
