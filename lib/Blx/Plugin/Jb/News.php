@@ -162,7 +162,7 @@ class News extends \Blx\Plugin {
         }
         $meta = sprintf( _( 'author %s / %s, comments %u' ), (string) $author, $time, $news['news_comments'] );
         if ( $allowComments && $news['news_allow_comments'] ) {
-            $comments =sprintf(  '[comments:%s:news:%u]', $news['news_realm'], $news['news_id'] );
+            $comments =sprintf(  '[comments:news:%u:%s]', $news['news_id'], $news['news_realm'] );
         } else {
             $comments = '';
         }
