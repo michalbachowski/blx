@@ -11,7 +11,6 @@ class Comments extends \Blx\Plugin {
     
     public function inject( \sfEvent $event, $content ) {
         $tmp = '!\[comments\:(.+)\:(.+)\:(.+)]!';
-        var_dump( preg_match( $tmp, $content ) );
         return preg_replace_callback(
             $this->pattern,
             array( $this, 'injectCallback' ),
