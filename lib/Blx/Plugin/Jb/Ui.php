@@ -11,7 +11,7 @@ class Ui extends \Blx\Plugin {
             $content,
             array(
                 '[favicon]' => \JBUi::faviconMarkup(),
-                '[jb_js]' => \JBUi::jbJsMarkup() . \JBUi::jbAnalyticsMarkup(),
+                '[jb_js]' => \JBUi::jbJsMarkup(),
                 '[jb_css]' => \JBUi::resetStyleMarkup() . \JBUi::jbCssMarkup(),
                 '[jb_menu]' => \JBUi::jbMenuMarkup(),
             )
