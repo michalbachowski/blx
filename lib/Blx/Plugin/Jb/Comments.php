@@ -31,7 +31,15 @@ class Comments extends \Blx\Plugin {
             return;
         }
         $reducer = function( $out, $cur ) { return $out . $cur; };
-        return array_reduce( array_map( array( $this, 'displayOne' ), $comments ), $reducer, sprintf( '<h3>%s</h3>', _( 'Comments' ) ) );
+        return sprintf(
+            '<section class="comments"><h3>%s</h3>%s</section>',
+            _( 'Comments' ),
+            array_reduce(
+                array_map( array( $this, 'displayOne' ), $comments ),
+                $reducer,
+                ''
+            )
+        );
     }
 
     protected function displayOne( $comment ) {
@@ -54,7 +62,7 @@ class Comments extends \Blx\Plugin {
             'permalink', 'editlink', 'removelink'
         );
         return sprintf(
-            '<article id="c%1$u" class="ui-widget-content ui-corner-bottom">
+            '<article id="comment%1$u" class="ui-widget-content">
                 <div class="comment-author">
                     <h3>%2$s <small>/ <time datetime="%3$s">%3$s</time></small></h3>
                     <div class="comment-author-data">%4$s</div>
