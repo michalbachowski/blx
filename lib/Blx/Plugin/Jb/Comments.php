@@ -30,19 +30,14 @@ class Comments extends \Blx\Plugin {
         if ( !$comments ) {
             return;
         }
-        $reducer = function( $out, $cur ) { return $out . $cur; };
         return sprintf(
             '<section class="comments"><h3>%s</h3>%s</section>',
             _( 'Comments' ),
-            array_reduce(
-                array_map( array( $this, 'displayOne' ), $comments ),
-                $reducer,
-                ''
-            )
+            \Blx\Util::displayArray( $comments, $this )
         );
     }
 
-    protected function displayOne( $comment ) {
+    public function displayOne( $comment ) {
         $menu = sprintf(
             '<div class="comment-menu">
                 <a href="%4$s" title="%1$s">

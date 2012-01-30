@@ -111,12 +111,12 @@ class News extends \Blx\Plugin {
         if ( !$newsList ) {
             return;
         }
-        $out = sprintf( '<h2>%s</h2>', _( 'News' ) );
-        foreach( $newsList as $news ) {
-            $out .= $this->displayOne( $news );
-        }
-        $out .= $this->displayArchive( $currentMonth );
-        return $out;
+        return sprintf(
+            '<h2>%s</h2>%s %s',
+            _( 'News' ),
+            \Blx\Util::displayArray( $newsList, $this ),
+            $this->displayArchive( $currentMonth )
+        );
     }
 
     protected function displayArchive( $currentMonth = null ) {
@@ -149,7 +149,7 @@ class News extends \Blx\Plugin {
         // generate output
         return sprintf( '<aside><strong>%s</strong><ul>%s</ul></aside>', _( 'News archive' ), $out );
     }
-    protected function displayOne( $news, $textKey = 'news_short', $allowComments = false, $header = 3, $linkHeader = true ) {
+    public function displayOne( $news, $textKey = 'news_short', $allowComments = false, $header = 3, $linkHeader = true ) {
         $time = sprintf( '<time datetime="%1$s">%1$s</time>', date( 'Y-m-d H:i:s', $news['news_date'] ) );
         $author = \JBUser::fromArray( $news, 'id', 'news_author_' );
         $title = \JBSanitize::html( $news['news_title'] );
