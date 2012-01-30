@@ -11,16 +11,16 @@ class Editable extends \Blx\Plugin {
 
     private function getForm( $event ) {
         $form = <<<EOF
-<form method="post" action="%s">
-    <div class="text">
+<form method="post" action="%s" id="form-edit">
+    <div class="text" id="box-title">
         <label for="title">%s</label>
         <input type="text" name="title" id="title" value="%s" />
     </div>
-    <div class="textarea">
+    <div class="textarea" id="box-content">
         <label for="content">%s</label>
         <textarea id="content" name="content">[raw_content]</textarea>
     </div>
-    <div class="submit">
+    <div class="submit" id="box-submit">
         <input type="submit" value="%s" />
     </div>
 </form>
