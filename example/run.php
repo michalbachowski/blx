@@ -29,8 +29,8 @@ $request->addPlugin( new Blx\Plugin\DefaultUrl( 'index.html' ) )
     ->addPlugin( new Blx\Plugin\Title( 'Heroes VI, Behemot`s Lair' ) )
     ->addPlugin( new Blx\Plugin\Jb\Ui() )
     ->addPlugin( new Blx\Plugin\Jb\Xinha() )
-    ->addPlugin( new Blx\Plugin\Jb\Css( 'css/xinha_editor.css', 'blx' ) )
-    ->addPlugin( new Blx\Plugin\Jb\Css( 'css/xinha_content.css', 'blx' ) )
+    ->addPlugin( new Blx\Plugin\Jb\Css( 'css/editor.css', 'blx' ) )
+    ->addPlugin( new Blx\Plugin\Jb\Css( 'css/content.css', 'blx' ) )
     ->addPlugin( new Blx\Plugin\Display() );
 # dispatch
 $request->dispatch();
