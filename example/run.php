@@ -20,6 +20,7 @@ $request->addPlugin( new Blx\Plugin\DefaultUrl( 'index.html' ) )
     ->addPlugin( new Blx\Plugin\Editable() )
     ->addPlugin( new Blx\Plugin\Redirect( '/nowiny', '/' ) )
     ->addPlugin( new Blx\Plugin\Jb\Comments() )
+    ->addPlugin( new Blx\Plugin\Jb\Board() )
     ->addPlugin( new Blx\Plugin\Jb\News() )
     ->addPlugin( new Blx\Plugin\Jb\DbStorage() )
 //    ->addPlugin( new Blx\Plugin\StaticFile( dirname( __FILE__ ) . '/pages/index.html' ) )
@@ -27,6 +28,9 @@ $request->addPlugin( new Blx\Plugin\DefaultUrl( 'index.html' ) )
     ->addPlugin( new Blx\Plugin\Layout( dirname( __FILE__ ) . '/layout/default.html' ) )
     ->addPlugin( new Blx\Plugin\Title( 'Heroes VI, Behemot`s Lair' ) )
     ->addPlugin( new Blx\Plugin\Jb\Ui() )
+    ->addPlugin( new Blx\Plugin\Jb\Xinha() )
+    ->addPlugin( new Blx\Plugin\Jb\Css( 'css/xinha_editor.css', 'blx' ) )
+    ->addPlugin( new Blx\Plugin\Jb\Css( 'css/xinha_content.css', 'blx' ) )
     ->addPlugin( new Blx\Plugin\Display() );
 # dispatch
 $request->dispatch();
