@@ -38,4 +38,12 @@ class Util {
     public function getCompleteUrl( $url ) {
         return sprintf( $this->urlPattern, $url );
     }
+
+    public static function displayArray( $items, $context, $method = 'displayOne' ) {
+        return array_reduce( array_map( array( $context, $method ), $items ), array( '\Blx\Util', 'reducer' ), '' );
+    }
+
+    public static function reducer( $out, $current ) {
+        return $out . $current;
+    }
 }
