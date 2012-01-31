@@ -4,7 +4,7 @@ namespace Blx\Plugin\Jb;
 class Comments extends \Blx\Plugin {
 
     protected $mapping = array(
-        'filter.response.normal' => 'inject'
+        'filter.output' => 'inject'
     );
 
     protected $pattern = '!\[comments\:(?P<item>[a-zA-Z0-9_]+)\:(?P<id>[0-9]+)(?:\:(?P<realm>[a-zA-Z0-9_]+))?\]!';
