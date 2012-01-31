@@ -1,7 +1,7 @@
 <?php
 namespace Blx\Plugin\Jb;
 
-class Xinha extends \Blx\Plugin\Js {
+class Xinha extends \Blx\Plugin\Jb\Js {
     protected $addXinha = false;
 
     protected $mapping = array(
@@ -10,6 +10,7 @@ class Xinha extends \Blx\Plugin\Js {
     );
 
     public function __construct() {
+        $this->realm = 'blx';
     }
 
     public function init( \sfEvent $event, $content ) {
@@ -21,9 +22,9 @@ class Xinha extends \Blx\Plugin\Js {
         if ( !$this->addXinha ) {
             return $content;
         }
-        $this->url = \JBUi::magazyn( 'js/xinha_conf.js', 'blx' );
+        $this->url = 'js/xinha_conf.js';
         $content = parent::output( $event, $content );
-        $this->url = \JBUi::magazyn( 'js/xinha/XinhaCore.js', 'blx' );
+        $this->url = 'js/xinha/XinhaCore.js';
         return parent::output( $event, $content );
     }
 
