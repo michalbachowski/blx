@@ -9,8 +9,8 @@ class Css extends \Blx\Plugin\Css {
         $this->realm = $realm;
     }
 
-    protected function prepareTag() {
-        return '<link rel="stylesheet" href="' . \JBUi::magazyn( $this->url, $this->realm ) . '" media="'. $this->media .'" />';
+    protected function prepareTag( $url, $media ) {
+        return parent::prepareTag( \JBUi::magazyn( $url, $this->realm ), $media );
     }
 
 }

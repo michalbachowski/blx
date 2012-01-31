@@ -13,11 +13,11 @@ class Css extends \Blx\Plugin {
         $this->media = $media;
     }
 
-    protected function prepareTag() {
-        return '<link rel="stylesheet" href="' . $this->url . '" media="'. $this->media .'" />';
+    protected function prepareTag( $url, $media ) {
+        return '<link rel="stylesheet" href="' . $url . '" media="'. $media .'" />';
     }
 
     public function output( \sfEvent $event, $content ) {
-        return str_replace( $this->prepend, $this->prepareTag() . $this->prepend, $content );
+        return str_replace( $this->prepend, $this->prepareTag( $this->url, $this->media ) . $this->prepend, $content );
     }
 }
