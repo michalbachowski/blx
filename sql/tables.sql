@@ -7,7 +7,6 @@ create table pages (
     title varchar not null,
     content text not null,
     metadata text,
-    created timestamp without time zone not null default now(),
     search_id integer not null default nextval( 'pages_search_id_seq' ) unique
 );
 
@@ -16,5 +15,5 @@ create table pages_trace (
     created timestamp without time zone not null default now(),
     dbuser text NOT NULL,
     constraint pages_trace_pkey primary key ( url, created ),
-    like files
+    like pages
 );
