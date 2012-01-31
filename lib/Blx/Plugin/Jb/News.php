@@ -66,9 +66,6 @@ class News extends \Blx\Plugin {
     }
 
     public function display( \sfEvent $event ) {
-        if ( isset( $event['arguments']['edit'] ) ) {
-            return;
-        }
         list( $newsDate, $newsId ) = $this->fetchItems( $event['url'] );
         switch( $this->checkUrl( $event['url'] ) ) {
             case self::TYPE_LIST:
@@ -85,6 +82,9 @@ class News extends \Blx\Plugin {
         }
         if ( !$out ) {
             return;
+        }
+        if ( isset( $event['arguments']['edit'] ) ) {
+            throw new \Blx\ForbiddenError( 'Editing news is forbidden' );
         }
         $event->setReturnValue( $out );
         return true;
