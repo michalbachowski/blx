@@ -10,7 +10,7 @@ class Xinha extends \Blx\Plugin\Jb\Js {
     );
 
     public function __construct() {
-        $this->realm = 'blx';
+        $this->realm = JB_REALM;
     }
 
     public function init( \sfEvent $event, $content ) {
