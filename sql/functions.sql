@@ -21,12 +21,12 @@ begin
     update
         blx.pages
     set
-        realm = v_realm_i,
         title = v_title_i,
         content = v_content_i,
         metadata = v_metadata_i
     where
-        url = v_url_i;
+        url = v_url_i and
+        realm = v_realm_i;
     -- if updated - exit
     if found then
         return true;
