@@ -11,6 +11,8 @@ class Xinha extends \Blx\Plugin\Jb\Js {
         'plugin.editable.filter.form' => 'init'
     );
 
+    public function __construct() {}
+
     public function prepare( \sfEvent $event ) {
         $this->request = $event->getSubject();
     }
