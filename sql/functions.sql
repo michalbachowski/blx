@@ -1,4 +1,4 @@
-create or replace function get_page( v_url_i varchar )
+create or replace function get_page( v_url_i varchar, v_realm_i varchar )
 returns setof pages language 'plpgsql' security definer as $$
 begin
     return query
@@ -7,7 +7,8 @@ begin
         from
             blx.pages
         where
-            url = v_url_i;
+            url = v_url_i and
+            realm = v_realm_i;
 end;
 $$;
 
