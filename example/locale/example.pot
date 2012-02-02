@@ -16,6 +16,6 @@ msgstr ""
 "X-Poedit-SearchPath-0: /home/mib/jb-translate/example/\n"
 "X-Poedit-SearchPath-1: /home/mib/jb-translate/example/template\n"
 
-#: /home/mib/jb-translate/example/run.php:27
-msgid "Heroes VI"
-msgstr "Heroes VI"
+#: /home/mib/jb-translate/example/run.php:28
+msgid "Example"
+msgstr "Example"
