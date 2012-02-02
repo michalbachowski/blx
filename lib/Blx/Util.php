@@ -3,10 +3,23 @@ namespace Blx;
 
 
 class Util {
-    protected $urlPattern;
+    protected $urlPattern = '%s';
 
-    public function __construct( $urlPattern ) {
+    public function __construct( $urlPattern=null ) {
+        if ( $urlPattern ) {
+           $this->setUrlPattern( $urlPattern );
+        }
+    }
+
+    public function setUrlPattern( $urlPattern ) {
+        if ( !$urlPattern ) {
+            throw new RuntimeException( 'URL pattern could not be empty' );
+        }
         $this->urlPattern = $urlPattern;
+    }
+
+    public function getUrlPattern() {
+        return $this->urlPattern;
     }
 
     public function prepareArguments() {
