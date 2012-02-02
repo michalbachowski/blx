@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-set_include_path( get_include_path() . ':' . realpath( dirname( __FILE__ ) . '/../lib' ) );
 require 'Blx/Loader.php';
 require 'sf/sfEventDispatcher.php';
 
