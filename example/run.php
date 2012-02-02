@@ -5,7 +5,7 @@ require 'sf/sfEventDispatcher.php';
 spl_autoload_register( array( new Blx\Loader(), 'autoload' ) );
 
 # prepare utility class
-$util = new Blx\Util( 'http://poligon.heroes.net.pl/mib/blx/example/run.php?url=%s' );
+$util = new Blx\Util();
 
 # initiate request
 $request = new Blx\Request( $util );
