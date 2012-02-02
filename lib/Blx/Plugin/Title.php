@@ -26,9 +26,11 @@ class Title extends \Blx\Plugin {
         }
     }
 
+    protected function getTitleSuffix() {
+        return _( $this->titleSuffix );
+    }
+
     public function filter_url( \sfEvent $event ) {
-        // translate title
-        $this->titleSuffix = _( $this->titleSuffix );
         // prepare bread crumbs and complete title for given url
         $parts = explode( '/', trim( $event['url'], '/' ) );
         $url = '';
@@ -73,7 +75,7 @@ class Title extends \Blx\Plugin {
             );
             $title = $crumb['title'] . ', ' . $title;
         }
-        $title .= $this->titleSuffix;
+        $title .= $this->getTitleSuffix();
         $nav = sprintf( $this->navWrap, $nav );
         $content = str_replace( $this->titlePattern, $title, $content );
         $content = str_replace( $this->navPattern, $nav, $content );
