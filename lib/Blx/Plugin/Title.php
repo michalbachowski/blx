@@ -17,7 +17,7 @@ class Title extends \Blx\Plugin {
     protected $navWrap = '<ul>%s</ul>';
 
     public function __construct( $titleSuffix, $tag = null, $wrap = null ) {
-        $this->titleSuffix = _( $titleSuffix );
+        $this->titleSuffix = $titleSuffix;
         if ( $tag ) {
             $this->navTag = $tag;
         }
@@ -27,9 +27,12 @@ class Title extends \Blx\Plugin {
     }
 
     public function filter_url( \sfEvent $event ) {
+        // translate title
+        $this->titleSuffix = _( $this->titleSuffix );
+        // prepare bread crumbs and complete title for given url
         $parts = explode( '/', trim( $event['url'], '/' ) );
         $url = '';
-
+        // loop throught all URL parts and fetch it`s title
         foreach( $parts as $part ) {
             $url .= '/' . $part;
             $tmpUrl = $event->getSubject()->getUtil()->fixInnerUrl( $url );
