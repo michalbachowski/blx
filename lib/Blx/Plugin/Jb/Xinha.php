@@ -10,11 +10,11 @@ class Xinha extends \Blx\Plugin\Jb\Js {
     );
 
     public function __construct() {
-        $this->realm = JB_REALM;
     }
 
     public function init( \sfEvent $event, $content ) {
         $this->addXinha = true;
+        $this->realm = JB_REALM;
         return $content;
     }
 
