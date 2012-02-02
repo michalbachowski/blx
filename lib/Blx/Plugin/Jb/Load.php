@@ -15,5 +15,8 @@ class Load extends \Blx\Plugin {
         define( 'JB_REALM', $this->realm );
         define( 'JB_DEBUG', 1 );
         require 'jbcore/jbcore.php';
+
+        $util = $event->getSubject()->getUtil();
+        $util->setUrlPattern( \Url::make( $util->getUrlPattern() ) );
     }
 }
