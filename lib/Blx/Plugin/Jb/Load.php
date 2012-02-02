@@ -7,8 +7,8 @@ class Load extends \Blx\Plugin {
     );
     protected $realm;
 
-    public function __construct( $realm ) {
-        $this->realm = $realm;
+    public function __construct( $realm=null ) {
+        $this->realm = $realm ?:  $_SERVER['X_REALM'];
     }
 
     public function update( \sfEvent $event ) {
