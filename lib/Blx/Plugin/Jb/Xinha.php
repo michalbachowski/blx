@@ -19,10 +19,10 @@ class Xinha extends \Blx\Plugin\Jb\Js {
 
     public function init( \sfEvent $event, $content ) {
         $this->addXinha = true;
-        $this->realm = JB_REALM;
+        $this->realm = 'blx';
         // append inline JS Script
         $this->request->addPlugin(
-            new \Blx\Plugin\InlineJs( sprintf( 'var siteRealm = "%s";', $this->realm ) )
+            new \Blx\Plugin\InlineJs( sprintf( 'var siteRealm = "%s";', JB_REALM ) )
         );
         return $content;
     }
