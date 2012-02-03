@@ -23,3 +23,18 @@ ul, ol {
 .xinha-dark-box {
     background-color: rgba(0,0,0,0.4);
 }
+
+ul.xinha-horizontal-menu {
+    width: 90%;
+    height: 2em;
+    overflow: hidden;
+    margin-left: 5%;
+    padding: 0;
+}
+    ul.xinha-horizontal-menu li {
+        list-style-type: none;
+        float: left;
+        height: 2em;
+        line-height: 2em;
+        padding: 0;
+    }
