@@ -1,4 +1,4 @@
-var _editor_url     = "/mib/blx/example/xinha/";
+var _editor_url     = "/xinha/";
 var _editor_lang    = "pl";
 
 $(document).ready(function() {
@@ -16,9 +16,9 @@ $(document).ready(function() {
 			'ExtendedFileManager',
             "ContextMenu",
             "SmartReplace",
+            "Stylist",
             //"Linker",
-            "TableOperations",
-            "CSSPicker"
+            "TableOperations"
 		];
         if(!Xinha.loadPlugins(xinha_plugins, xinha_init)) {
             return;
@@ -47,11 +47,7 @@ $(document).ready(function() {
             ["separator","killword","clearfonts","removeformat","toggleborders","splitblock","lefttoright","righttoleft"],
             ["separator","htmlmode","showhelp","about"]
         ];
-
-        CSSPicker.cssList = {
-            "xinha-dark-box": { 'wrapper': 'div', 'name': 'Dark background' }
-        };
-
+        
         /*
 		[
 			["popupeditor","separator"],
@@ -85,6 +81,9 @@ $(document).ready(function() {
             "http://magazyn.jaskiniabehemota.net/blx/css/editor.css",
             "http://magazyn.jaskiniabehemota.net/blx/css/content.css"
         ];
+
+        xinha_config.stylistLoadStyles('ul.xinha-horizontal-menu { zoom: 1 }', {'ul.xinha-horizontal-menu' : 'Horizontal menu'});
+        xinha_config.stylistLoadStyles('p.xinha-dark-box {}', {'p.xinha-dark-box' : 'Dark box'});
 
 		xinha_editors   = Xinha.makeEditors(xinha_editors, xinha_config, xinha_plugins);
 		$("textarea").each(function() {
