@@ -129,7 +129,7 @@ class Request {
             # prepare url and arguments
             list( $url, $args ) = $this->filterUrlAndArgs( $url, $args );
             if ( !$url ) {
-                throw new Http404Error();
+                throw new Http404Error( _( 'Invalid url' ) );
             }
             # handle request
             $event = $this->getDispatcher()->notifyUntil(
@@ -142,7 +142,7 @@ class Request {
 
             # no response - error
             if ( !$event->isProcessed() ) {
-                throw new Http404Error();
+                throw new Http404Error( sprintf( _( 'Unknown URL %s' ), $url ) );
             }
             # filter response
             $out = $this->getDispatcher()->filter(
