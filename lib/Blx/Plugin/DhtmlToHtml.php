@@ -1,7 +1,7 @@
 <?php
 namespace Blx\Plugin;
 
-class DhtmlToEdit extends \Blx\Plugin {
+class DhtmlToHtml extends \Blx\Plugin {
     protected $mapping = array(
         'filter.url'    => 'filter_url',
         'filter.args'   => 'filter_args',
@@ -20,7 +20,9 @@ class DhtmlToEdit extends \Blx\Plugin {
 
     public function filter_args( \sfEvent $event, $args ) {
         if ( $this->isDhtml ) {
-            $args['edit'] = true;
+            $args['is_dynamic'] = true;
+        } else {
+            $args['is_dynamic'] = false;
         }
         return $args;
     }

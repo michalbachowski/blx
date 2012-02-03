@@ -14,7 +14,7 @@ $request = new Blx\Request( $util );
 $request->addPlugin( new Blx\Plugin\DefaultUrl( 'index.html' ) )
     ->addPlugin( new Blx\Plugin\Jb\Load() )
 //    ->addPlugin( new Blx\Plugin\Jb\FixBetaUrl() )
-    ->addPlugin( new Blx\Plugin\DhtmlToEdit() )
+    ->addPlugin( new Blx\Plugin\DhtmlToHtml() )
     ->addPlugin( new Blx\Plugin\ForbidRequest( '!^/template/!' ) )
     ->addPlugin( new Blx\Plugin\Jb\Acl( Blx\Plugin\Jb\Acl::ALLOW ) )
     ->addPlugin( new Blx\Plugin\Editable() )
