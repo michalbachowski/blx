@@ -24,6 +24,13 @@ class DhtmlToHtml extends \Blx\Plugin {
         } else {
             $args['is_dynamic'] = false;
         }
+        
+        $event->getSubject()->getDispatcher()->notify(
+            new \sfEvent(
+                $this,
+                'plugin.yeld.dynamic_request'
+            )
+        );
         return $args;
     }
 }
