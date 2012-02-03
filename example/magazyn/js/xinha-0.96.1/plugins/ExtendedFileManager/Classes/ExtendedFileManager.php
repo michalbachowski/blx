@@ -34,7 +34,9 @@ class ExtendedFileManager
     /**
      * Manager mode - image | link
      */
-	var $mode;
+    var $mode;
+
+    var $excludeDirs = array( 'avatars', 'users', 'x', 'krypta', 'krypta2', 'mapy', 'warsztat', 'tracker', 'media' );
 
 	/**
 	 * Constructor. Create a new Image Manager instance.
@@ -123,10 +125,12 @@ class ExtendedFileManager
 		while (false !== ($entry = $d->read())) 
 		{
 			//If it is a directory, and it doesn't start with
-			// a dot, and if is it not the thumbnail directory
+            // a dot, and if is it not the thumbnail directory
 			if(is_dir($base.$entry) 
 				&& substr($entry,0,1) != '.'
-				&& $this->isThumbDir($entry) == false) 
+                && $this->isThumbDir($entry) == false
+                && !in_array( $entry, $this->excludeDirs )
+            ) 
 			{
 				$relative = Files::fixPath($path.$entry);
 				$fullpath = Files::fixPath($base.$entry);
@@ -135,7 +139,6 @@ class ExtendedFileManager
 			}
 		}
 		$d->close();
-
 		Return $dirs;
 	}
 
@@ -166,11 +169,11 @@ class ExtendedFileManager
 
 
 		$d = @dir($fullpath);
-		
+
 		while (false !== ($entry = $d->read())) 
-		{
+        {
 			//not a dot file or directory
-			if(substr($entry,0,1) != '.')
+			if(substr($entry,0,1) != '.' && !in_array( $entry, $this->excludeDirs ) )
 			{
 				if(is_dir($fullpath.$entry)
 					&& $this->isThumbDir($entry) == false)
