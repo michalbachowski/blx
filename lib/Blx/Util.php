@@ -59,4 +59,8 @@ class Util {
     public static function reducer( $out, $current ) {
         return $out . $current;
     }
+
+    public static function _( $string ) {
+        return dgettext( 'blx', $string );
+    }
 }
