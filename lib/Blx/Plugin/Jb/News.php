@@ -22,9 +22,11 @@ class News extends \Blx\Plugin {
 
     public function __construct( $latestNewsNumber = 5 ) {
         $this->latestNewsNumber = (int) $latestNewsNumber;
-        $this->months = array( _('january'), _('february'), _('march'), _('april'),
-            _('may'), _('june'), _('july'), _('august'), _('september'),
-            _('october'), _('november'), _('december') );
+        $this->months = array( \Blx\Util::_('january'), \Blx\Util::_('february'),
+            \Blx\Util::_('march'), \Blx\Util::_('april'), \Blx\Util::_('may'),
+            \Blx\Util::_('june'), \Blx\Util::_('july'), \Blx\Util::_('august'),
+            \Blx\Util::_('september'), \Blx\Util::_('october'),
+            \Blx\Util::_('november'), \Blx\Util::_('december') );
     }
 
     public function start( \sfEvent $event ) {
@@ -91,12 +93,19 @@ class News extends \Blx\Plugin {
     }
 
     protected function fetchList() {
-        return $this->displayList( \JBNews::getLatest( $this->latestNewsNumber ) );
+        return $this->displayList( \JBNews::getLatest( $this->latestNewsNumber ) )
+            . sprintf(
+                '<p class="news-archive-button"><a href="%s" title="%s">%s</a></p>',
+                $this->util->getCompleteUrl( $this->makeArchiveUrl( date( 'Y-m' ) ) ),
+                \Blx\Util::_( 'View news archive' ),
+                \Blx\Util::_( 'Archive' )
+            );
     }
 
     protected function fetchArchive( $date ) {
         list( $year, $month ) = explode( '-', $date );
-        return $this->displayList( \JBNews::getFromMonth( (int) $month, $year ), $date );
+        return $this->displayList( \JBNews::getFromMonth( (int) $month, $year ), $date )
+            . $this->displayArchive( $date );
     }
 
     protected function fetchNews( $id ) {
@@ -112,10 +121,9 @@ class News extends \Blx\Plugin {
             return;
         }
         return sprintf(
-            '<h2>%s</h2>%s %s',
-            _( 'News' ),
-            \Blx\Util::displayArray( $newsList, $this ),
-            $this->displayArchive( $currentMonth )
+            '<h2>%s</h2>%s',
+            \Blx\Util::_( 'News' ),
+            \Blx\Util::displayArray( $newsList, $this )
         );
     }
 
@@ -127,7 +135,7 @@ class News extends \Blx\Plugin {
         $monthActivePattern = '<li class="ui-state-default"><a href="%s" title="%s">%s</a></li>';
         $monthInactivePattern = '<li class="ui-state-disabled"><span>%3$s</span></li>';
         $monthCurrentPattern = '<li class="ui-state-highlight"><strong>%3$s</strong></li>';
-        $title = _( 'News archive %s' );
+        $title = \Blx\Util::_( 'News archive %s' );
         $tmp = array();
         // prepare months
         foreach( $dates as $date => $newsNumber ) {
@@ -147,7 +155,7 @@ class News extends \Blx\Plugin {
             $out .= sprintf( $yearPattern, $year, $archive );
         }
         // generate output
-        return sprintf( '<aside><strong>%s</strong><ul>%s</ul></aside>', _( 'News archive' ), $out );
+        return sprintf( '<aside><strong>%s</strong><ul>%s</ul></aside>', \Blx\Util::_( 'News archive' ), $out );
     }
     public function displayOne( $news, $textKey = 'news_short', $allowComments = false, $header = 3, $linkHeader = true ) {
         $time = sprintf( '<time datetime="%1$s">%1$s</time>', date( 'Y-m-d H:i:s', $news['news_date'] ) );
@@ -156,11 +164,11 @@ class News extends \Blx\Plugin {
         if ( $linkHeader ) {
             $title = sprintf( '<a href="%s" title="%s">%s</a>',
                 $this->util->getCompleteUrl( $this->makeUrl( $news ) ),
-                sprintf( _( 'Read complete news &quot;%s&quot;' ), $title ),
+                sprintf( \Blx\Util::_( 'Read complete news &quot;%s&quot;' ), $title ),
                 $title
             );
         }
-        $meta = sprintf( _( 'author %s / %s, comments %u' ), (string) $author, $time, $news['news_comments'] );
+        $meta = sprintf( \Blx\Util::_( 'author %s / %s, comments %u' ), (string) $author, $time, $news['news_comments'] );
         if ( $allowComments && $news['news_allow_comments'] ) {
             $comments =sprintf(  '[comments:news:%u:%s]', $news['news_id'], $news['news_realm'] );
         } else {
@@ -214,9 +222,9 @@ class News extends \Blx\Plugin {
         list( $newsDate, $newsId ) = $this->fetchItems( $url );
         switch( $this->checkUrl( $url ) ) {
             case self::TYPE_LIST:
-                return _( 'News' );
+                return \Blx\Util::_( 'News' );
             case self::TYPE_ARCHIVE:
-                return sprintf( _( 'News archive %s' ), $newsDate );
+                return sprintf( \Blx\Util::_( 'News archive %s' ), $newsDate );
             case self::TYPE_NEWS:
                 $news = $this->fetch( $newsId );
                 if ( !$news ) {
