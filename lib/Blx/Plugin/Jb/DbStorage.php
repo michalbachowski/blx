@@ -47,12 +47,13 @@ class DbStorage extends \Blx\Plugin {
         $event->getSubject()->redirectToPage( $event['url'] );
     }
     protected function storeIntoDb( \sfEvent $event ) {
-        $query = 'select blx.set_page(:url, :realm, :title, :content, :metadata);';
+        $query = 'select blx.set_page(:url, :realm, :title, :author, :content, :metadata);';
         $metadata = $this->prepareMetadata( $event['arguments'] );
         $params = array(
             ':url'      => $event['url'],
             ':realm'    => JB_REALM,
             ':title'    => $event['arguments']['title'],
+            ':author'   => \JBCore::user(),
             ':content'  => $event['arguments']['content'],
             ':metadata' => json_encode( $metadata )
         );

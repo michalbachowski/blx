@@ -8,6 +8,7 @@ create table pages (
     content text not null,
     metadata text,
     search_id integer not null default nextval( 'pages_search_id_seq' ) unique,
+    author_id integer not null,
     primary key (url, realm)
 );
 
