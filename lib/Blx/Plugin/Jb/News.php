@@ -93,19 +93,28 @@ class News extends \Blx\Plugin {
     }
 
     protected function fetchList() {
-        return $this->displayList( \JBNews::getLatest( $this->latestNewsNumber ) )
-            . sprintf(
-                '<p class="news-archive-button"><a href="%s" title="%s">%s</a></p>',
-                $this->util->getCompleteUrl( $this->makeArchiveUrl( date( 'Y-m' ) ) ),
-                \Blx\Util::_( 'View news archive' ),
-                \Blx\Util::_( 'Archive' )
-            );
+        return $this->displayList(
+            \JBNews::getLatest( $this->latestNewsNumber ),
+            null,
+            $this->displayArchiveButton()
+        );
+    }
+
+    protected function displayArchiveButton() {
+        return sprintf(
+            '<p class="news-archive-button"><a href="%s" title="%s">%s</a></p>',
+            $this->util->getCompleteUrl( $this->makeArchiveUrl( date( 'Y-m', \JBNews::getLastNewsDate() ) ) ),
+            \Blx\Util::_( 'View news archive' ),
+            \Blx\Util::_( 'Archive' )
+        );
     }
 
     protected function fetchArchive( $date ) {
         list( $year, $month ) = explode( '-', $date );
-        return $this->displayList( \JBNews::getFromMonth( (int) $month, $year ), $date )
-            . $this->displayArchive( $date );
+        return $this->displayList(
+            \JBNews::getFromMonth( (int) $month, $year ),
+            $date,
+            $this->displayArchive( $date ) );
     }
 
     protected function fetchNews( $id ) {
@@ -116,14 +125,15 @@ class News extends \Blx\Plugin {
         return $this->displayOne( $news, 'news_text', true, 2, false );
     }
 
-    protected function displayList( $newsList, $currentMonth = null ) {
+    protected function displayList( $newsList, $currentMonth = null, $archive = '' ) {
         if ( !$newsList ) {
             return;
         }
         return sprintf(
-            '<h2>%s</h2>%s',
+            '<div class="news-list"><h2>%s</h2>%s %s</div>',
             \Blx\Util::_( 'News' ),
-            \Blx\Util::displayArray( $newsList, $this )
+            \Blx\Util::displayArray( $newsList, $this ),
+            $archive
         );
     }
 
@@ -155,7 +165,7 @@ class News extends \Blx\Plugin {
             $out .= sprintf( $yearPattern, $year, $archive );
         }
         // generate output
-        return sprintf( '<aside><strong>%s</strong><ul>%s</ul></aside>', \Blx\Util::_( 'News archive' ), $out );
+        return sprintf( '<aside class="news-archive"><strong>%s</strong><ul>%s</ul></aside>', \Blx\Util::_( 'News archive' ), $out );
     }
     public function displayOne( $news, $textKey = 'news_short', $allowComments = false, $header = 3, $linkHeader = true ) {
         $time = sprintf( '<time datetime="%1$s">%1$s</time>', date( 'Y-m-d H:i:s', $news['news_date'] ) );
