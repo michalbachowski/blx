@@ -15,6 +15,7 @@ a:hover {
 }
 p {
     padding: 0 1em .5em;
+    line-height: 2em;
 }
 p:first-child {
     padding-top: .5em;
