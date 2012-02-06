@@ -1,6 +1,15 @@
 body {
     line-height: 1.7em;
 }
+h2 {
+    font-size: 1.7em;
+}
+h3 {
+    font-size: 1.3em;
+}
+h4 {
+    font-size: 1em;
+}
 a:hover {
     text-decoration: underline;
 }
