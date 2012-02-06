@@ -104,6 +104,10 @@ msgstr "Przeczyta pełną treść nowiny &quot;%s&quot;"
 msgid "author %s / %s, comments %u"
 msgstr "autor %s / %s, komentarzy %u"
 
+#: ../Plugin/Jb/News.php:179
+msgid "Read more"
+msgstr "Czytaj więcej"
+
 #: ../Plugin/Title.php:84
 msgid "Go to service`s main page"
 msgstr "Przejdź do strony głównej serwisu"

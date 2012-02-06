@@ -172,12 +172,12 @@ class News extends \Blx\Plugin {
         $time = sprintf( '<time datetime="%1$s">%1$s</time>', date( 'Y-m-d H:i:s', $news['news_date'] ) );
         $author = \JBUser::fromArray( $news, 'id', 'news_author_' );
         $title = \JBSanitize::html( $news['news_title'] );
+        $more = '';
         if ( $linkHeader ) {
-            $title = sprintf( '<a href="%s" title="%s">%s</a>',
-                $this->util->getCompleteUrl( $this->makeUrl( $news ) ),
-                sprintf( \Blx\Util::_( 'Read complete news &quot;%s&quot;' ), $title ),
-                $title
-            );
+            $url = $this->util->getCompleteUrl( $this->makeUrl( $news ) );
+            $anchorTitle = sprintf( \Blx\Util::_( 'Read complete news &quot;%s&quot;' ), $title );
+            $more = sprintf( '<p class="news-more"><a href="%s" title="%s">%s</a></p>', $url, $anchorTitle, \Blx\Util::_( 'Read more' ) );
+            $title = sprintf( '<a href="%s" title="%s">%s</a>', $url, $anchorTitle, $title );
         }
         $meta = sprintf( \Blx\Util::_( 'author %s / %s, comments %u' ), (string) $author, $time, $news['news_comments'] );
         if ( $allowComments && $news['news_allow_comments'] ) {
@@ -187,8 +187,8 @@ class News extends \Blx\Plugin {
         }
         $content = \JBFormatter::format( $news[$textKey] );
         return sprintf(
-            '<article class="news"><h%5$u>%s</h%5$u><p class="news-metadata">%s</p><div class="news-text">%s</div></article>%s',
-            $title, $meta, $content, $comments, $header );
+            '<article class="news"><h%6$u>%s</h%6$u><p class="news-metadata">%s</p><div class="news-text">%s</div>%s</article>%s',
+            $title, $meta, $content, $comments, $more, $header );
     }
 
     protected function fetch( $id ) {
