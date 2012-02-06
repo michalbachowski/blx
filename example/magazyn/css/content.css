@@ -67,6 +67,10 @@ table.with-full-border td {
 
 .xinha-dark-box {
     background-color: rgba(0,0,0,0.4);
+    width: 90%;
+    margin: 1em auto;
+    border: 1px solid #000;
+    border-radius: 10px;
 }
 
 ul.xinha-horizontal-menu {
