@@ -15,10 +15,19 @@ a:hover {
 }
 p {
     padding: 0 1em .5em;
+}
+p, li, td, a, span, strong {
     line-height: 2em;
 }
 p:first-child {
     padding-top: .5em;
+}
+p.error {
+    background-color: rgba(101,0,0,0.5);
+    border: 1px solid #ab0000;
+    width: 50%;
+    margin: 0.5em auto 1em;
+
 }
 strong, b {
     font-weight: bold;
