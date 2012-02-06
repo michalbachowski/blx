@@ -54,6 +54,17 @@ ul, ol {
     ol li {
         list-style-type: decimal;
     }
+table {
+    margin: 1em auto;
+}
+table.with-border,
+table.with-full-border td {
+    border-width: 1px;
+}
+    td {
+        padding: 0 0.5em;
+    }
+
 .xinha-dark-box {
     background-color: rgba(0,0,0,0.4);
 }

@@ -86,6 +86,8 @@ $(document).ready(function() {
         xinha_config.stylistLoadStyles('ul.xinha-horizontal-menu { zoom: 1 }', {'ul.xinha-horizontal-menu' : 'Horizontal menu'});
         xinha_config.stylistLoadStyles('p.xinha-dark-box {}', {'p.xinha-dark-box' : 'Dark box'});
         xinha_config.stylistLoadStyles('a.with-image {}', {'a.with-image' : 'Anchor with image'});
+        xinha_config.stylistLoadStyles('table.with-border {}', {'table.with-border' : 'Table with border'});
+        xinha_config.stylistLoadStyles('table.with-full-border {}', {'table.with-full-border' : 'Table with full border'});
 
 		xinha_editors   = Xinha.makeEditors(xinha_editors, xinha_config, xinha_plugins);
 		$("textarea").each(function() {
