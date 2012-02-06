@@ -19,6 +19,9 @@ em, i {
 del, strike, s {
     text-decoration: line-through;
 }
+small {
+    font-size: 0.8em;
+}
 ul, ol {
     padding: 0.5em 1em 0;
     margin-left: 2em;
