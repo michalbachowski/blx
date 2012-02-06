@@ -41,7 +41,6 @@ class Title extends \Blx\Plugin {
             'url' => $event->getSubject()->getUtil()->fixInnerUrl( '/' ),
             'title' => $this->getTitleSuffix()
         );
-        var_dump( $event['url'] );
         foreach( $parts as $part ) {
             $url .= '/' . $part;
             $tmpUrl = $event->getSubject()->getUtil()->fixInnerUrl( $url );
