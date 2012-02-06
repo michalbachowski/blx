@@ -41,7 +41,10 @@ class Util {
     }
 
     public function fixInnerUrl( $url ) {
-        $url = rtrim( trim( $url, '/' ), '.html' );
+        $url = trim( $url, '/' );
+        if ( substr( $url, -5, 5 ) == '.html' ) {
+            $url = substr( $url, 0, -5 );
+        }
         if ( !$url ) {
             $url = 'index';
         }
