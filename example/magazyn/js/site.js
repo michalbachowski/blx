@@ -1,5 +1,8 @@
 $(document).ready(function() {
-    jbUser( function() {
+    jbUser( function( user ) {
+        if ( user.id == -1 ) {
+            return;
+        } 
         jbManageBar( jbLang( "Add" ), function() {
             var url = window.prompt( jbLang( "Type new page url" ) );
             if ( !url ) {
