@@ -3,3 +3,33 @@
     margin: 2em auto;
     position: relative;
 }
+    /* header */
+    header {
+        height: 150px;
+        margin-bottom: 2em;
+        width: 100%;
+        position: relative;
+    }
+        header h1 {
+            display: block;
+            height: 1em;
+            width: 12em;
+            position: absolute;
+            top: 50%;
+            left: 250px;
+            margin-top: -0.5em;
+            font-size: 3em;
+            line-height: 1em;
+        }
+        header #jb-shield {
+            display: block;
+            height: 129px;
+            width: 100px;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            left: 0;
+            top: 10px;
+            background: transparent url("../../common/logo_jb.png") 0 0 no-repeat;
+            text-indent: -1000em;
+        }
