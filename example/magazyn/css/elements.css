@@ -64,3 +64,65 @@
             #breadcrumbs li:first-child:before {
                 display: none;
             }
+
+    /* news list, news and news archive */
+        .news-list .news {
+            padding-top: 1em;
+        }
+            .news-metadata {
+                font-size: 0.8em;
+                padding: 0;
+            }
+            .news-more a:after {
+                content: " »";
+            }
+        .news-list .news-archive-button {
+            padding: 1em;
+            height: 2em;
+        }
+            .news-list .news-archive-button a {
+                display: block;
+                float: right;
+                height: 2em;
+                width: 7em;
+                text-align: center;
+                line-height: 2em;
+            }
+        .news-archive {
+            width: 100%;
+            margin: 1em auto;
+        }
+            .news-archive ul {
+                padding: 0;
+                margin-left: 1em;
+                margin-top: 0.5em;
+            }
+                .news-archive li {
+                    list-style-type: none;
+                    height: 3.4em;
+                    padding: 0;
+                }
+                .news-archive > ul > li > strong {
+                    display: block;
+                    height: 1.5em;
+                    line-height: 1.5em;
+                }
+                    .news-archive li ul {
+                        height: 1.5em;
+                        padding: 0.2em;
+                        margin-top: 0;
+                        margin-bottom: 0;
+                        width: 100%;
+                    }
+                        .news-archive li li {
+                            height: 1.5em;
+                            float: left;
+                        }
+                            .news-archive li li a,
+                            .news-archive li li span,
+                            .news-archive li li strong {
+                                display: block;
+                                line-height: 1.5em;
+                                height: 1.5em;
+                                padding: 0 0.3em;
+                            }
