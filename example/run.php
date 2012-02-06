@@ -38,6 +38,7 @@ $request->addPlugin( new Blx\Plugin\DefaultUrl( 'index.html' ) )
     ->addPlugin( new Blx\Plugin\Jb\Css( 'css/editor.css', 'blx' ) )
     ->addPlugin( new Blx\Plugin\Jb\Css( 'css/content.css', 'blx' ) )
     ->addPlugin( new Blx\Plugin\Jb\Css( 'css/elements.css', 'blx' ) )
+    ->addPlugin( new Blx\Plugin\Jb\Css( 'css/layout.css', 'blx' ) )
     ->addPlugin( new Blx\Plugin\Display() );
 # dispatch
 $request->dispatch();
