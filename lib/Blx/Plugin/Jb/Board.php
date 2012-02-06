@@ -4,7 +4,7 @@ namespace Blx\Plugin\Jb;
 class Board extends \Blx\Plugin {
 
     protected $mapping = array(
-        'filter.response.normal' => 'inject'
+        'filter.output' => 'inject'
     );
 
     protected $pattern = '!\[board\:(?P<board>[0-9]+)(?:\:(?P<entries>[0-9]+))?\]!';
