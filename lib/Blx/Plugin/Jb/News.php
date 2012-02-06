@@ -22,14 +22,15 @@ class News extends \Blx\Plugin {
 
     public function __construct( $latestNewsNumber = 5 ) {
         $this->latestNewsNumber = (int) $latestNewsNumber;
+    }
+
+    public function start( \sfEvent $event ) {
+        // init months
         $this->months = array( \Blx\Util::_('january'), \Blx\Util::_('february'),
             \Blx\Util::_('march'), \Blx\Util::_('april'), \Blx\Util::_('may'),
             \Blx\Util::_('june'), \Blx\Util::_('july'), \Blx\Util::_('august'),
             \Blx\Util::_('september'), \Blx\Util::_('october'),
             \Blx\Util::_('november'), \Blx\Util::_('december') );
-    }
-
-    public function start( \sfEvent $event ) {
         // remember utility instance
         $this->util = $event->getSubject()->getUtil();
         // check whether we have enything to do
