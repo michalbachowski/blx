@@ -1,6 +1,9 @@
 body {
     line-height: 1.7em;
 }
+a:hover {
+    text-decoration: underline;
+}
 p {
     padding: 0 1em .5em;
 }
