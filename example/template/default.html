@@ -5,15 +5,20 @@
         [jb_css]
     </head>
     <body>
-        <header>
-            <h1>
-                <a href="[site_url]" title="[site_title]">[site_name]</a>
-            </h1>
-            <a href="[jb_url]" id="jb-shield" title="[jb_title]">[jb_name]</a>
-        </header>
-        <div id="content">[content]</div>
-        <nav id="breadcrumbs">[navigation]</nav>
-        <nav id="menu">[include:_special/menu.html]</nav>
+        <div id="wrapper-main">
+            <header>
+                <h1>
+                    <a href="[site_url]" title="[site_title]">[site_name]</a>
+                </h1>
+                <a href="[jb_url]" id="jb-shield" title="[jb_title]">[jb_name]</a>
+            </header>
+            <div id="content">[content]</div>
+            <nav id="breadcrumbs">[navigation]</nav>
+            <nav id="menu">[include:_special/menu.html]</nav>
+            <footer>
+                <p id="copyright">[copyright]</p>
+            </footer>
+        </div>
         [jb_menu]
         [jb_js]
     </body>

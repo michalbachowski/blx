@@ -13,6 +13,7 @@ $request = new Blx\Request( $util );
 # load basic output plugins
 $request->addPlugin( new Blx\Plugin\DefaultUrl( 'index.html' ) )
     ->addPlugin( new Blx\Plugin\Layout( dirname( __FILE__ ) . '/template/default.html' ) )
+    ->addPlugin( new Blx\Plugin\Jb\Copyright() )
     ->addPlugin( new Blx\Plugin\Jb\Load() )
 //    ->addPlugin( new Blx\Plugin\Jb\FixBetaUrl() )
     ->addPlugin( new Blx\Plugin\DhtmlToHtml() )
