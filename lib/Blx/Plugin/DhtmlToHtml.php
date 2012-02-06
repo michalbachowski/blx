@@ -7,7 +7,7 @@ class DhtmlToHtml extends \Blx\Plugin {
         'filter.args'   => 'filter_args',
     );
     protected $isDhtml = false;
-    protected $ext = '.d.html';
+    protected $ext = '.dhtml.html';
 
     public function filter_url( \sfEvent $event, $value ) {
         $value = $event->getSubject()->getUtil()->fixInnerUrl( $value );
