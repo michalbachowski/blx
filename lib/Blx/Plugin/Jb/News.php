@@ -187,7 +187,7 @@ class News extends \Blx\Plugin {
         }
         $content = \JBFormatter::format( $news[$textKey] );
         return sprintf(
-            '<article class="news"><h%6$u>%s</h%6$u><p class="news-metadata">%s</p><div class="news-text">%s</div>%s</article>%s',
+            '<article class="news"><h%6$u>%s</h%6$u><p class="news-metadata">%s</p><div class="news-text">%s</div>%s %s</article>',
             $title, $meta, $content, $comments, $more, $header );
     }
 
