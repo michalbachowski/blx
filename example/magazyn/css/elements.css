@@ -126,3 +126,14 @@
                                 height: 1.5em;
                                 padding: 0 0.3em;
                             }
+    /* board latest discussions */
+    .board-topics {
+    }
+        .board-topics h4 {
+            font-size: 1.2em;
+            padding-bottom: 0.5em;
+        }
+            .board-topics dd {
+                font-size: 0.8em;
+                padding: 0 0 0.5em;
+            }
