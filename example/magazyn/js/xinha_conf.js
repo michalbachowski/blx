@@ -79,7 +79,8 @@ $(document).ready(function() {
         xinha_config.pageStyleSheets = [
             "http://magazyn.jaskiniabehemota.net/common/css/reset.css",
             "http://magazyn.jaskiniabehemota.net/blx/css/editor.css",
-            "http://magazyn.jaskiniabehemota.net/blx/css/content.css"
+            "http://magazyn.jaskiniabehemota.net/blx/css/content.css",
+            "http://magazyn.jaskiniabehemota.net/" + siteRealm + "/css/layout.css"
         ];
 
         xinha_config.stylistLoadStyles('ul.xinha-horizontal-menu { zoom: 1 }', {'ul.xinha-horizontal-menu' : 'Horizontal menu'});
