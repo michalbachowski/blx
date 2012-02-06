@@ -7,6 +7,15 @@ p {
 p:first-child {
     padding-top: .5em;
 }
+strong, b {
+    font-weight: bold;
+}
+em, i {
+    font-style: italic;
+}
+del, strike, s {
+    text-decoration: line-through;
+}
 ul, ol {
     padding: 0.5em 1em 0;
     margin-left: 2em;
