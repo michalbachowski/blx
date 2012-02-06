@@ -19,8 +19,8 @@ class Load extends \Blx\Plugin {
         require 'jbcore/jbcore.php';
 
         // load Blx translations
-    	bind_textdomain_codeset( JB_REALM, JB_ENCODING );
-	    bindtextdomain( JB_REALM, JB_LOCALE_DIR );
+    	bind_textdomain_codeset( 'blx', JB_ENCODING );
+	    bindtextdomain( 'blx', JB_LOCALE_DIR );
 
         // fix url pattern
         $util = $event->getSubject()->getUtil();
