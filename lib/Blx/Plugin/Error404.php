@@ -10,10 +10,12 @@ class Error404 extends \Blx\Plugin {
         if ( !$event['exception'] instanceof \Blx\Http404Error ) {
             return;
         }
-        $event->setReturnValue( var_export(
-            $event['exception'],
-            true
-        ) );
+        $event->setReturnValue(
+            sprintf(
+                '<p class="error ui-state-error ui-corner-all">%s</p>',
+                \Blx\Util::_( 'Page not found' )
+            )
+        );
         return true;
     }
 
