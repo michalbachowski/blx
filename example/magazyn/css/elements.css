@@ -143,3 +143,57 @@
                 font-size: 0.8em;
                 padding: 0 0 0.5em;
             }
+
+    /* menu, and menu-horizontal */
+    #menu {
+        height: 2em;
+    }
+        #menu a {
+            display: block;
+            line-height: 2em;
+        }
+        #menu ul,
+        #menu li {
+            padding: 0;
+            margin: 0;
+            min-height: 2em;
+            line-height: 2em;
+        }
+        #menu > ul {
+            height: 2em;
+        }
+            #menu li ul {
+                position: absolute;
+            }
+            #menu li ul,
+            #menu li:hover ul ul {
+                display: none;
+            }
+            #menu li:hover ul,
+            #menu li:hover li:hover ul,
+            #menu li:hover li:hover li:hover ul {
+                display: block;
+            }
+    .menu-horizontal {
+        height: 2em;
+    }
+        #menu.menu-horizontal ul {
+            margin-top: -2px;
+        }
+        #menu.menu-horizontal li {
+            list-style-type: none;
+            float: left;
+            height: 2em;
+            background-color: inherit;
+            padding: 0 0.5em;
+        }
+            
+            #menu.menu-horizontal li li {
+                float: none;
+                height: auto;
+                width: 15em;
+            }
+            #menu.menu-horizontal li li ul {
+                margin-top: -2em;
+                left: 90%;
+            }
