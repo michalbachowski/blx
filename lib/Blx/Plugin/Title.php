@@ -13,7 +13,8 @@ class Title extends \Blx\Plugin {
     protected $titleSuffix;
     protected $breadcrumbs = array();
 
-    protected $navTag = '<li><a href="%s">%s</a></li>';
+    protected $navActiveTag = '<li><a href="%s">%s</a></li>';
+    protected $navInactiveTag = '<li><span>%2$s</span></li>';
     protected $navWrap = '<ul>%s</ul>';
 
     public function __construct( $titleSuffix, $tag = null, $wrap = null ) {
@@ -33,14 +34,20 @@ class Title extends \Blx\Plugin {
     public function filter_url( \sfEvent $event ) {
         // prepare bread crumbs and complete title for given url
         $parts = explode( '/', trim( $event['url'], '/' ) );
+        $urlFixed = $event->getSubject()->getUtil()->fixInnerUrl( $event['url'] );
         $url = '';
         // loop throught all URL parts and fetch it`s title
+        $this->breadcrumbs[] = array(
+            'url' => $event->getSubject()->getUtil()->fixInnerUrl( '/' ),
+            'title' => $this->getTitleSuffix()
+        );
+        var_dump( $event['url'] );
         foreach( $parts as $part ) {
             $url .= '/' . $part;
             $tmpUrl = $event->getSubject()->getUtil()->fixInnerUrl( $url );
             # fetch title
             $this->breadcrumbs[] = array(
-                'url' => $tmpUrl,
+                'url' => $tmpUrl == $urlFixed ? '' : $tmpUrl,
                 'title' => $this->fetchTitle( $tmpUrl, $event )
             );
         }
@@ -69,7 +76,7 @@ class Title extends \Blx\Plugin {
         $nav = '';
         foreach( $this->breadcrumbs as $crumb ) {
             $nav .= sprintf(
-                $this->navTag,
+                $crumb['url'] ? $this->navActiveTag : $this->navInactiveTag,
                 $event->getSubject()->getUtil()->getCompleteUrl( $crumb['url'] ),
                 $crumb['title']
             );
