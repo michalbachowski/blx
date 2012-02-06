@@ -88,7 +88,7 @@ msgstr "Nowiny"
 #: ../Plugin/Jb/News.php:138 ../Plugin/Jb/News.php:227
 #, php-format
 msgid "News archive %s"
-msgstr "Archivum %s"
+msgstr "Archiwum %s"
 
 #: ../Plugin/Jb/News.php:158
 msgid "News archive"
@@ -103,3 +103,7 @@ msgstr "Przeczyta pełną treść nowiny &quot;%s&quot;"
 #, php-format
 msgid "author %s / %s, comments %u"
 msgstr "autor %s / %s, komentarzy %u"
+
+#: ../Plugin/Title.php:84
+msgid "Go to service`s main page"
+msgstr "Przejdź do strony głównej serwisu"
