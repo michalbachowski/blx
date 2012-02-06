@@ -58,12 +58,18 @@
                 content: "/";
                 float: left;
                 height: 2em;
+                line-height: 2em;
                 width: 1em;
                 text-align: center;
             }
             #breadcrumbs li:first-child:before {
                 display: none;
             }
+                #breadcrumbs li a,
+                #breadcrumbs li span {
+                    height: 2em;
+                    line-height: 2em;
+                }
 
     /* news list, news and news archive */
         .news-list .news {
