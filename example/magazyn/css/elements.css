@@ -33,3 +33,34 @@
             background: transparent url("../../common/logo_jb.png") 0 0 no-repeat;
             text-indent: -1000em;
         }
+
+    /* breadcrumbs */
+    #breadcrumbs {
+        position: absolute;
+        top: 150px;
+        height: 2em;
+        width: 50%;
+        overflow: hidden;
+    }
+        #breadcrumbs ul {
+            height: 2em;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+            #breadcrumbs li {
+                float: left;
+                height: 2em;
+                padding: 0;
+                list-style-type: none;
+            }
+            #breadcrumbs li:before {
+                content: "/";
+                float: left;
+                height: 2em;
+                width: 1em;
+                text-align: center;
+            }
+            #breadcrumbs li:first-child:before {
+                display: none;
+            }
