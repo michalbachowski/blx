@@ -111,3 +111,11 @@ msgstr "Czytaj więcej"
 #: ../Plugin/Title.php:84
 msgid "Go to service`s main page"
 msgstr "Przejdź do strony głównej serwisu"
+
+#: ../Plugin/Jb/Board.php:41
+msgid "View all discussions from board"
+msgstr "Zobacz wyszystkie dyskusje na forum"
+
+#: ../Plugin/Jb/Board.php:40
+msgid "Latest discussions"
+msgstr "Ostatnio na forum"

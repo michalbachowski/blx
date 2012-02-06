@@ -37,8 +37,8 @@ class Board extends \Blx\Plugin {
         return sprintf(
             '<aside class="board-topics"><h4><a href="%s" title="%s">%s</a></h4><dl>%s</dl></aside>',
             \Url::make( 'forum/' . $board, null, 'imperium' ),
-            _( 'View all discussions from board' ),
-            _( 'Latest discussions' ),
+            \Blx\Util::_( 'View all discussions from board' ),
+            \Blx\Util::_( 'Latest discussions' ),
             \Blx\Util::displayArray( $topics, $this )
         );
     }
