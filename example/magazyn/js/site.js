@@ -12,6 +12,9 @@ $(document).ready(function() {
             } else {
                 url += '?edit=1';
             }
+            if ( url.indexOf("/") !== 0 ) {
+                url = '/' + url;
+            }
             window.location = url;
         } );
         var url = window.location.protocol + '//' + window.location.host;
