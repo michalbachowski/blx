@@ -1,12 +1,18 @@
 <html style="background-color: #000">
     <head>
-        <title>[title]</title>
+        <title>[title], [jb_name]</title>
         [favicon]
         [jb_css]
     </head>
     <body style="background-color: #000; color: #fff;">
-        <div id="content" style="width: 90%; margin: 2em auto 1em; padding: 2em; background-color: rgba(17,17,17,0.7); border: 0 solid #fff; border-width: 0 1px;">[content]</div>
-        <nav>[navigation]</nav>
+        <header>
+            <h1>
+                <a href="[site_url]" title="[site_title]">[site_name]</a>
+            </h1>
+            <a href="[jb_url]" id="jb-shield" title="[jb_title]">[jb_name]</a>
+        </header>
+        <div id="content">[content]</div>
+        <nav id="breadcrumbs">[navigation]</nav>
         [jb_menu]
         [jb_js]
     </body>

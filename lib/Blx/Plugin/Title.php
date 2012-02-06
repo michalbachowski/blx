@@ -79,6 +79,11 @@ class Title extends \Blx\Plugin {
         $nav = sprintf( $this->navWrap, $nav );
         $content = str_replace( $this->titlePattern, $title, $content );
         $content = str_replace( $this->navPattern, $nav, $content );
-        return $content;
+        $replacements = array(
+            '[site_url]' => \Url::make(),
+            '[site_title]' => \Blx\Util::_( 'Go to service`s main page' ),
+            '[site_name]' => $this->getTitleSuffix(),
+        );
+        return strtr( $content, $replacements );
     }
 }

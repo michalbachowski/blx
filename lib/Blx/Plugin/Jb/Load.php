@@ -3,7 +3,8 @@ namespace Blx\Plugin\Jb;
 
 class Load extends \Blx\Plugin {
     protected $mapping = array(
-        'dispatch.start' => 'update'
+        'dispatch.start' => 'update',
+        'filter.output' => 'filter'
     );
     protected $realm;
 
@@ -24,5 +25,14 @@ class Load extends \Blx\Plugin {
         // fix url pattern
         $util = $event->getSubject()->getUtil();
         $util->setUrlPattern( \Url::make( $util->getUrlPattern() ) );
+    }
+
+    public function filter( \sfEvent $event, $content ) {
+        $replacements = array(
+            '[jb_url]' => \Url::make( '', '', 'heroes' ),
+            '[jb_title]' => \_c( 'Go to Behemoth`s Lair main page' ),
+            '[jb_name]' => \_c( 'Behemoth`s Lair' )
+        );
+        return strtr( $content, $replacements ); 
     }
 }
