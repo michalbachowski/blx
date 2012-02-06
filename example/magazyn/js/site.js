@@ -29,5 +29,8 @@ $(document).ready(function() {
         if ( url.indexOf(".dhtml") == - 1 ) {
             jbManageBar( jbLang( "Edit" ), url.replace(/\.html($|\?)/, ".dhtml$1?edit=1") );
         }
+        if ( url.indexOf("_special.html") == -1 ) {
+            jbManageBar( jbLang( "Special pages" ), "/_special.html" );
+        }
     } );
 });
