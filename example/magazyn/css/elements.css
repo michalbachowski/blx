@@ -136,12 +136,20 @@
     .board-topics {
     }
         .board-topics h4 {
-            font-size: 1.2em;
-            padding-bottom: 0.5em;
+            font-size: 1.3em;
+            padding-bottom: 0;
+            line-height: 1.3em;
         }
+            .board-topics dt {
+                height: 1.2em;
+            }
             .board-topics dd {
                 font-size: 0.8em;
                 padding: 0 0 0.5em;
+                line-height: 1em;
+            }
+            .board-topics dt a {
+                line-height: 1em;
             }
 
     /* menu, and menu-horizontal */
