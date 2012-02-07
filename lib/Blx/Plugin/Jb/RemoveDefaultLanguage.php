@@ -1,11 +1,16 @@
 <?php
 namespace Blx\Plugin\Jb;
 
-class RemovePlLanguage extends \Blx\Plugin {
+class RemoveDefaultLanguage extends \Blx\Plugin {
     protected $mapping = array(
         'filter.url' => 'fix'
     );
     protected $baseUrl;
+    protected $language='pl';
+
+    public function __construct( $language = 'pl' ) {
+        $this->language = $language;
+    }
 
     public function fix( \sfEvent $event, $url ) {
         $tmp = $this->_fix( $event, $url );
@@ -14,10 +19,13 @@ class RemovePlLanguage extends \Blx\Plugin {
     }
 
     protected function _fix( \sfEvent $event, $url ) {
-        if ( strpos( $url, 'pl/' ) !== 0 ) {
+        if ( !$this->language ) {
             return $url;
         }
-        $url = substr( $url, 3 );
+        if ( strpos( $url, $this->language . '/' ) !== 0 ) {
+            return $url;
+        }
+        $url = substr( $url, strlen( $this->language) + 1 );
         if ( null === $this->baseUrl ) {
             $event->getSubject()->redirectToPage( $url );
         }
