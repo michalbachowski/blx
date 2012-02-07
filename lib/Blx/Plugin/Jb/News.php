@@ -166,7 +166,7 @@ class News extends \Blx\Plugin {
             $out .= sprintf( $yearPattern, $year, $archive );
         }
         // generate output
-        return sprintf( '<aside class="news-archive"><strong>%s</strong><ul>%s</ul></aside>', \Blx\Util::_( 'News archive' ), $out );
+        return sprintf( '<aside class="news-archive"><h3>%s</h3><ul>%s</ul></aside>', \Blx\Util::_( 'News archive' ), $out );
     }
     public function displayOne( $news, $textKey = 'news_short', $allowComments = false, $header = 3, $linkHeader = true ) {
         $time = sprintf( '<time datetime="%1$s">%1$s</time>', date( 'Y-m-d H:i:s', $news['news_date'] ) );
