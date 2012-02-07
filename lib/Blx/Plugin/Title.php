@@ -3,9 +3,10 @@ namespace Blx\Plugin;
 
 class Title extends \Blx\Plugin {
     protected $mapping = array(
-        'dispatch.start' => 'filter_url',
+        'filter.url' => 'filter_url',
         'filter.output' => 'filter_output',
     );
+    protected $baseUrl;
 
     protected $titlePattern = '[title]';
     protected $navPattern = '[navigation]';
@@ -31,10 +32,14 @@ class Title extends \Blx\Plugin {
         return _( $this->titleSuffix );
     }
 
-    public function filter_url( \sfEvent $event ) {
+    public function filter_url( \sfEvent $event, $baseUrl ) {
+        if ( $this->baseUrl !== null ) {
+            return;
+        }
+        $this->baseUrl = $baseUrl;
         // prepare bread crumbs and complete title for given url
-        $parts = explode( '/', trim( $event['url'], '/' ) );
-        $urlFixed = $event->getSubject()->getUtil()->fixInnerUrl( $event['url'] );
+        $parts = explode( '/', trim( $baseUrl, '/' ) );
+        $urlFixed = $event->getSubject()->getUtil()->fixInnerUrl( $baseUrl );
         $url = '';
         // loop throught all URL parts and fetch it`s title
         $this->breadcrumbs[] = array(
@@ -81,7 +86,6 @@ class Title extends \Blx\Plugin {
             );
             $title = $crumb['title'] . ', ' . $title;
         }
-        $title .= $this->getTitleSuffix();
         $nav = sprintf( $this->navWrap, $nav );
         $content = str_replace( $this->titlePattern, $title, $content );
         $content = str_replace( $this->navPattern, $nav, $content );
