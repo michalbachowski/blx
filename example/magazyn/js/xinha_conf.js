@@ -34,7 +34,7 @@ $(document).ready(function() {
 		xinha_config.toolbar =
         [
             ["popupeditor"],
-            ["separator","formatblock",/*"fontname",*/"fontsize","bold","italic","underline","strikethrough"],
+            ["separator","formatblock","bold","italic","underline","strikethrough"],
             //["separator","forecolor","hilitecolor","textindicator"],
             ["separator","subscript","superscript"],
             
