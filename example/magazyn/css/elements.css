@@ -37,7 +37,7 @@
             padding: 0;
             position: absolute;
             left: 0;
-            top: 10px;
+            top: 0;
             background: transparent url("../../common/logo_jb.png") 0 0 no-repeat;
             text-indent: -1000em;
         }
