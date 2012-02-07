@@ -59,7 +59,7 @@ class Comments extends \Blx\Plugin {
         return sprintf(
             '<article id="comment%1$u" class="ui-widget-content">
                 <div class="comment-author">
-                    <h3>%2$s <small>/ <time datetime="%3$s">%3$s</time></small></h3>
+                    <h4>%2$s <small>/ <time datetime="%3$s">%3$s</time></small></h4>
                     <div class="comment-author-data">%4$s</div>
                 </div>
                 <div class="comment-text">%5$s</div>
