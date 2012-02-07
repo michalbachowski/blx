@@ -2,6 +2,15 @@
     margin: 2em auto;
     position: relative;
 }
+    /* jb-menu */
+    #jb-menu {
+        font-size: 1em;
+    }
+    #gate-links a {
+        padding: 0.2em;
+        line-height: 1.2em;
+    }
+
     /* header */
     header {
         height: 150px;
