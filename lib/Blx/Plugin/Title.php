@@ -34,7 +34,7 @@ class Title extends \Blx\Plugin {
 
     public function filter_url( \sfEvent $event, $baseUrl ) {
         if ( $this->baseUrl !== null ) {
-            return;
+            return $baseUrl;
         }
         $this->baseUrl = $baseUrl;
         // prepare bread crumbs and complete title for given url
@@ -55,6 +55,7 @@ class Title extends \Blx\Plugin {
                 'title' => $this->fetchTitle( $tmpUrl, $event )
             );
         }
+        return $baseUrl;
     }
 
     protected function fetchTitle( $url, \sfEvent $event ) {
