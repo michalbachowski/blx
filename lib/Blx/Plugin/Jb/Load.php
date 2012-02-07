@@ -31,7 +31,8 @@ class Load extends \Blx\Plugin {
         $replacements = array(
             '[jb_url]' => \Url::make( '', '', 'heroes' ),
             '[jb_title]' => \_c( 'Go to Behemoth`s Lair main page' ),
-            '[jb_name]' => \_c( 'Behemoth`s Lair' )
+            '[jb_name]' => \_c( 'Behemoth`s Lair' ),
+            '[jb_lang]' => \JBCore::lang()
         );
         return strtr( $content, $replacements ); 
     }
