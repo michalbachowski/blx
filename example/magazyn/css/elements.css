@@ -11,6 +11,11 @@
         line-height: 1.2em;
     }
 
+    /* mine upload */
+    #upload-form iframe {
+        width: 450px;
+        height: 450px;
+    }
     /* header */
     header {
         height: 150px;
