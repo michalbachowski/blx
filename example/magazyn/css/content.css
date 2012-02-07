@@ -79,13 +79,18 @@ ul.xinha-horizontal-menu {
     width: 90%;
     height: 2em;
     overflow: hidden;
-    margin-left: 5%;
-    padding: 0;
+    margin: 0.5em 5% 1em;
+    padding: 0 0.5em;
 }
     ul.xinha-horizontal-menu li {
         list-style-type: none;
         float: left;
         height: 2em;
-        line-height: 2em;
         padding: 0;
     }
+        ul.xinha-horizontal-menu li a {
+            display: block;
+            height: 2em;
+            line-height: 2em;
+            padding: 0 0.3em;
+        }
