@@ -17,7 +17,7 @@ $(document).ready(function() {
             "ContextMenu",
             "SmartReplace",
             "Stylist",
-            //"Linker",
+            "Linker",
             "TableOperations"
 		];
         if(!Xinha.loadPlugins(xinha_plugins, xinha_init)) {
@@ -72,7 +72,7 @@ $(document).ready(function() {
             "Code"     : "pre",
             "Address"  : "address"
         };
-
+        xinha_config.Linker.backend = '/scan.php';
 		xinha_config.showLoading = false;
 		xinha_config.statusBar = false;
         xinha_config.stripBaseHref = true;

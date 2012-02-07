@@ -20,6 +20,15 @@ class DbStorage extends \Blx\Plugin {
         $event->setReturnValue( $data['content'] );
         return true;
     }
+
+    public function listPages( $realm = null ) {
+        $query = 'select * from blx.list_pages(:realm) order by url asc';
+        $params = array(
+            ':realm' => $realm?: JB_REALM
+        );
+        return \JBDB::getInstance()->queryParams( $query, $params );
+    }
+
     protected function fetch( $url ) {
         if ( !isset( $this->cache[$url] ) ) {
             $this->cache[$url] = $this->fetchFromDb( $url );

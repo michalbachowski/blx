@@ -1,5 +1,18 @@
 set search_path to blx;
 
+create or replace function list_pages( v_realm_i varchar )
+returns setof pages language 'plpgsql' security definer as $$
+begin
+    return query
+        select
+            *
+        from
+            blx.pages
+        where
+            realm = v_realm_i;
+end;
+$$;
+
 create or replace function get_page( v_url_i varchar, v_realm_i varchar )
 returns setof pages language 'plpgsql' security definer as $$
 begin

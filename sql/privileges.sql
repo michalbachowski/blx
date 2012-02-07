@@ -5,6 +5,10 @@ ALTER TABLE pages_trace OWNER TO jaskinia;
 
 GRANT USAGE ON SCHEMA blx TO jaskinia_common;
 
+ALTER FUNCTION list_pages(varchar) OWNER TO jaskinia;
+REVOKE ALL ON FUNCTION list_pages(varchar) FROM PUBLIC;
+GRANT ALL ON FUNCTION list_pages(varchar) TO jaskinia_common;
+
 ALTER FUNCTION get_page(varchar, varchar) OWNER TO jaskinia;
 REVOKE ALL ON FUNCTION get_page(varchar, varchar) FROM PUBLIC;
 GRANT ALL ON FUNCTION get_page(varchar, varchar) TO jaskinia_common;
