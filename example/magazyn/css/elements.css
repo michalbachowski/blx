@@ -49,7 +49,7 @@
         height: 2em;
         width: 50%;
         overflow: hidden;
-        z-index: 1000;
+        z-index: 200;
     }
         #breadcrumbs ul {
             height: 2em;
@@ -164,6 +164,7 @@
     /* menu, and menu-horizontal */
     #menu {
         height: 2em;
+        z-index: 500;
     }
         #menu a {
             display: block;
@@ -181,6 +182,7 @@
         }
             #menu li ul {
                 position: absolute;
+                z-index: 500;
             }
             #menu li ul,
             #menu li:hover ul ul {
@@ -194,8 +196,8 @@
     .menu-horizontal {
         height: 2em;
     }
-        #menu.menu-horizontal ul {
-            margin-top: -2px;
+        #menu.menu-horizontal ul ul {
+            margin-top: -5px;
         }
         #menu.menu-horizontal li {
             list-style-type: none;
