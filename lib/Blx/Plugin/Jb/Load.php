@@ -22,6 +22,9 @@ class Load extends \Blx\Plugin {
     	bind_textdomain_codeset( 'blx', JB_ENCODING );
 	    bindtextdomain( 'blx', JB_LOCALE_DIR );
 
+        // add REALM_PATH/app to include path
+        set_include_path( get_include_path() . PATH_SEPARATOR . JB_REALM_PATH . 'app' );
+        
         // fix url pattern
         $util = $event->getSubject()->getUtil();
         $util->setUrlPattern( \Url::make( $util->getUrlPattern() ) );
