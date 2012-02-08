@@ -100,3 +100,6 @@ ul.xinha-horizontal-menu {
     padding: 0.5em;
     float: left;
 }
+    .xinha-left-menu li {
+        list-style-type: none;
+    }
