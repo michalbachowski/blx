@@ -30,6 +30,15 @@ def copy(realm):
     local('sudo su jaskinia -c "chmod g+w -R %s"' % dest_path)
 
 @task
+def pliki(realm):
+    files_path = '%s/pliki/%s' % (realms_path, realm)
+    with settings(hide('warnings'), warn_only=True):
+        if local("test -d %s" % files_path).succeeded:
+            return
+    local('sudo su jaskinia -c "mkdir %s"' % files_path)
+    local('sudo su jaskinia -c "chmod g+w -R %s"' % files_path)
+
+@task
 def magazyn(realm):
     source_path = '%s/magazyn' % realm_path(realm)
     dest_path = '%s/magazyn/%s' % (realms_path, realm)
@@ -120,11 +129,18 @@ def test(realm):
     test_jbcore_realm_db_config(realm)
     test_lighttpd_config(realm)
     test_generate_board_list(realm)
+    # locale and site`s name
     print yellow('INFO '), 'Update site`s name in run.php and locale/*'
+    # mine`s chamber
+    print yellow('INFO '), 'You may want to add mine`s chamber for new service'
+    print indent('Sample command: fab mine:%(r)s,"%(rc)s","%(r)s",GROUP_ID' % \
+            {'r': realm, 'rc': realm.capitalize()}, 6)
+    print indent('For more informations execute: fab -d mine', 6)
 
 @task(default=True)
 def deploy(realm):
     copy(realm)
+    pliki(realm)
     magazyn(realm)
     db(realm)
     test(realm)
