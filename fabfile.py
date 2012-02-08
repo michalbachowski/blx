@@ -3,7 +3,7 @@
 from fabric.api import local, settings, hide, task, abort, sudo
 from fabric.colors import red, green, yellow
 from fabric.utils import indent
-from jbcore.object import JBObject
+from jbcore.object import JBObject, JBError
 from jbcore.sql import JBDB
 
 jaskinia_path = '/home/jaskinia'
@@ -74,9 +74,37 @@ def test_generate_board_list(realm):
     print indent('HINT: check manually in %s' % path, 6);
 
 @task
+def mine(id, name, path, group):
+    """
+    Creates public chamber with given id, name and path for given group.
+
+    @param  string  id      chamber ID
+    @param  string  name    chamber name
+    @param  string  path    path inside /home/jaskinia/realms/pliki -without it!
+    @param  int     group   group that will manage new chamber
+    """
+    print 'Creating mine chamber'
+    try:
+        JBObject.setRealm('kopalnia')
+    except JBError:
+        abort('Couldn`t set realm')
+
+    db = JBDB.instance()
+    cur = db.cursor()
+    query='insert into chambers values (%s, %s, %s, %s::int[], %s::int[], ' \
+        + '%s::int[], %s::int[], %s::int[], %s::int[], %s)'
+    params = (id, name, path, None, [group], [group], \
+        None, None, None, False)
+    cur.execute(query, params)
+    db.connect().commit()
+
+@task
 def db(realm):
     print 'Creating default pages'
-    JBObject.setRealm(realm)
+    try:
+        JBObject.setRealm(realm)
+    except JBError:
+        pass
     db = JBDB.instance()
     cur = db.cursor()
     query = 'select blx.set_page(%s, %s, %s, %s, %s)'
