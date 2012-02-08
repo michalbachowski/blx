@@ -22,8 +22,13 @@ def realm_path(realm):
     return '%(rp)s/%(r)s' % {'rp': realms_path, 'r': realm}
 
 @task
-def copy(realm):
-    dest_path = realm_path(realm)
+def copy(dest_dir):
+    """
+    Creates new directory for realm (realms/dest_dir) with proper permissions
+
+    @param  string  dest_dir   destination directory name
+    """
+    dest_path = realm_path(dest_dir)
     with settings(hide('warnings'), warn_only=True):
         if local("test -d %s" % dest_path).succeeded:
             return
@@ -31,8 +36,14 @@ def copy(realm):
     local('sudo su jaskinia -c "chmod g+w -R %s"' % dest_path)
 
 @task
-def pliki(realm):
-    files_path = '%s/pliki/%s' % (realms_path, realm)
+def pliki(dest_dir):
+    """
+    Creates new directory in "pliki" (realms/pliki/dest_dir)
+    with proper permissions
+
+    @param  string  dest_dir    destination directory name
+    """
+    files_path = '%s/pliki/%s' % (realms_path, dest_dir)
     with settings(hide('warnings'), warn_only=True):
         if local("test -d %s" % files_path).succeeded:
             return
@@ -40,9 +51,15 @@ def pliki(realm):
     local('sudo su jaskinia -c "chmod g+w -R %s"' % files_path)
 
 @task
-def magazyn(realm):
-    source_path = '%s/magazyn' % realm_path(realm)
-    dest_path = '%s/magazyn/%s' % (realms_path, realm)
+def magazyn(source_dir, dest_dir):
+    """
+    Creates symlink from realms/source_dir/magazyn do realms/magazyn/dest_dir
+
+    @param  string  source_dir  source directory name
+    @param  string  dest_dir    destination directory name
+    """
+    source_path = '%s/magazyn' % realm_path(source_dir)
+    dest_path = '%s/magazyn/%s' % (realms_path, dest_dir)
     local("test -d %s" % source_path)
     with settings(hide('warnings'), warn_only=True):
         if local("test -d %s" % dest_path).succeeded:
@@ -127,6 +144,11 @@ def lang(source_dir, dest_realm, lang='pl_PL'):
 
 @task
 def db(realm):
+    """
+    Creates default pages/articles in blx.pages
+
+    @param  string  realm   realm that will own pages
+    """
     print 'Creating default pages'
     try:
         JBObject.setRealm(realm)
@@ -145,6 +167,11 @@ def db(realm):
 
 @task
 def test(realm):
+    """
+    Tests verious configuration files (realms, dbpass, lighttpd)
+
+    @param  string  realm   realm to check
+    """
     test_jbcore_realm_config(realm)
     test_jbcore_realm_db_config(realm)
     test_lighttpd_config(realm)
@@ -162,6 +189,7 @@ def deploy(realm, group):
     copy(realm)
     lang(realm, realm)
     pliki(realm)
-    magazyn(realm)
+    magazyn(realm, realm)
     db(realm)
+    mine(realm, realm.capitalize(), realm, group)
     test(realm)
