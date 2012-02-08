@@ -1,7 +1,10 @@
 #wrapper-main {
-    margin: 2em auto;
+    margin: 2em auto 0;
     position: relative;
 }
+    footer {
+        padding-bottom: 1em;
+    }
     /* jb-menu */
     #jb-menu {
         font-size: 1em;
