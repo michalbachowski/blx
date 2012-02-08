@@ -136,6 +136,8 @@ def db(realm):
     cur = db.cursor()
     query = 'select blx.set_page(%s, %s, %s, %s, %s)'
     params = [('index.html', realm, u'Strona główna', 108, u'[news]'),\
+        ('_special.html', realm, u'Strony specjalne', 108, \
+            u'<ul><li><a href="/_special/menu.html">Menu (PL)</li></ul>'),
         ('_special/menu.html', realm, u'Menu (PL)', 108, \
             u'<ul><li>Forum</li><li>O stronie</li></ul>')]
     cur.executemany(query, params)
