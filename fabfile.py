@@ -9,6 +9,7 @@ from jbcore.sql import JBDB
 jaskinia_path = '/home/jaskinia'
 realms_path = '%s/realms' % jaskinia_path
 lib_path = '%s/lib' % jaskinia_path
+locale_path = '%s/locale/%s/LC_MESSAGES/%s.mo' % (jaskinia_path, '%s', '%s')
 config_path = '%s/config' % jaskinia_path
 realms_conf_path = '%s/jbcore/include/conf.realms.ini' % lib_path
 realms_db_conf_path = '%s/dbpass.ini' % config_path
@@ -108,6 +109,23 @@ def mine(id, name, path, group):
     db.connect().commit()
 
 @task
+def lang(source_dir, dest_realm, lang='pl_PL'):
+    """
+    Compiles locale file (lang.po) for given realm (realms/source_dir/locale/)
+    and saves result (.mo) into given directory
+    (locale/lang/LC_MESSAGES/dest_realm.mo)
+
+    @param  string  source_dir  source realm dir (realms/source_dir/locale/)
+    @param  string  dest_realm  destination realm name (dest_realm.mo)
+    @param  string  lang        language file to compile (pl_PL by default)
+    """
+    lang_path = '%s/locale/%s.po' % (realm_path(source_dir), lang)
+    dest_path = locale_path % (lang, dest_realm)
+    local('test -e %s' % lang_path)
+    local('sudo su jaskinia -c "msgfmt %s -o %s"' % (lang_path, dest_path))
+    local('sudo /etc/rc.d/init.d/fcgi restart jaskinia')
+
+@task
 def db(realm):
     print 'Creating default pages'
     try:
@@ -138,8 +156,9 @@ def test(realm):
     print indent('For more informations execute: fab -d mine', 6)
 
 @task(default=True)
-def deploy(realm):
+def deploy(realm, group):
     copy(realm)
+    lang(realm, realm)
     pliki(realm)
     magazyn(realm)
     db(realm)
