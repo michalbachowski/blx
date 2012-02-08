@@ -92,6 +92,7 @@ def test(realm):
     test_jbcore_realm_db_config(realm)
     test_lighttpd_config(realm)
     test_generate_board_list(realm)
+    print yellow('INFO '), 'Update site`s name in run.php and locale/*'
 
 @task(default=True)
 def deploy(realm):
