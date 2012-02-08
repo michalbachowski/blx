@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from fabric.api import local, settings, hide, task, abort, sudo
+from fabric.api import local, settings, hide, task, abort, sudo, lcd
 from fabric.colors import red, green, yellow
 from fabric.utils import indent
 from jbcore.object import JBObject, JBError
@@ -34,6 +34,21 @@ def copy(dest_dir):
             return
     local('sudo su jaskinia -c "cp -r %s %s"' % (source_path, dest_path))
     local('sudo su jaskinia -c "chmod g+w -R %s"' % dest_path)
+
+@task(alias='rcf')
+def remove_blx_common_files(dest_dir):
+    """
+    Removes common Blx files that are linked from magazyn/blx
+
+    @param  string  dest_dir    destination directory (realms/dest_dir/magazyn)
+    """
+    dest_path = realm_path(dest_dir)
+    with lcd(dest_path):
+        with lcd('magazyn/css'):
+            local('rm content.css  editor.css  elements.css  form.css')
+        with lcd('magazyn/js'):
+            local('rm site.js  xinha  xinha_conf.js')
+            local('rm -r xinha-0.96.1')
 
 @task
 def pliki(dest_dir):
@@ -187,6 +202,7 @@ def test(realm):
 @task(default=True)
 def deploy(realm, group):
     copy(realm)
+    remove_blx_common_files(realm)
     lang(realm, realm)
     pliki(realm)
     magazyn(realm, realm)
