@@ -18,12 +18,4 @@ msgstr ""
 
 #: /home/mib/jb-translate/example/run.php:29
 msgid "Example"
-msgstr "Example"
-
-#: /home/mib/jb-translate/lib/Blx/Request.php:132
-msgid "Invalid url"
-msgstr "Podano niepoprawny adres URL"
-
-#: /home/mib/jb-translate/lib/Blx/Request.php:145
-msgid "Unknown URL %s"
-msgstr "Nieznany adres URL %s"
+msgstr ""
