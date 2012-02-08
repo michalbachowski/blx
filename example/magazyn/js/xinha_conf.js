@@ -88,6 +88,7 @@ $(document).ready(function() {
         xinha_config.stylistLoadStyles('a.with-image {}', {'a.with-image' : 'Anchor with image'});
         xinha_config.stylistLoadStyles('table.with-border {}', {'table.with-border' : 'Table with border'});
         xinha_config.stylistLoadStyles('table.with-full-border {}', {'table.with-full-border' : 'Table with full border'});
+        xinha_config.stylistLoadStyles('ul.xinha-left-menu {}', {'ul.xinha-left-menu' : 'Menu on the left'});
 
 		xinha_editors   = Xinha.makeEditors(xinha_editors, xinha_config, xinha_plugins);
 		$("textarea").each(function() {

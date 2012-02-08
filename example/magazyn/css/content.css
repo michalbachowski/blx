@@ -94,3 +94,9 @@ ul.xinha-horizontal-menu {
             line-height: 2em;
             padding: 0 0.3em;
         }
+
+.xinha-left-menu {
+    margin: 0.5em;
+    padding: 0.5em;
+    float: left;
+}
