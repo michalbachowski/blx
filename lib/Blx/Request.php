@@ -34,7 +34,6 @@ class Request {
     protected $method;
     protected $dispatcher;
 
-
     public function __construct( Util $util ) {
         list( $url, $args, $method ) = $util->prepareArguments();
         if ( self::CLI != $method && self::GET != $method && self::POST != $method ) {
@@ -76,7 +75,13 @@ class Request {
 
     public function addPlugin( Plugin $plugin ) {
         $plugin->register( $this->getDispatcher() );
+        $this->initPlugin( $plugin );
         return $this;
+    }
+
+    public function initPlugin( Plugin $plugin ) {
+        $plugin->setRequest( $this );
+        $plugin->init();
     }
 
     public function redirectToPage( $url ) {
