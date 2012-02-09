@@ -4,7 +4,8 @@ namespace Blx\Plugin\Jb;
 class Load extends \Blx\Plugin {
     protected $mapping = array(
         'dispatch.start' => 'update',
-        'filter.output' => 'filter'
+        'filter.output' => 'filter',
+        'filter.response.normal' => 'filter'
     );
     protected $realm;
     protected $groups;
