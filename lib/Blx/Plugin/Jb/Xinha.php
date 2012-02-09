@@ -8,7 +8,7 @@ class Xinha extends \Blx\Plugin\Jb\Js {
     protected $mapping = array(
         'dispatch.start' => 'prepare',
         'filter.output' => 'output',
-        'plugin.editable.filter.form' => 'init'
+        'plugin.editable.filter.form' => 'initXinha'
     );
 
     public function __construct() {}
@@ -17,7 +17,7 @@ class Xinha extends \Blx\Plugin\Jb\Js {
         $this->request = $event->getSubject();
     }
 
-    public function init( \sfEvent $event, $content ) {
+    public function initXinha( \sfEvent $event, $content ) {
         $this->addXinha = true;
         $this->realm = 'blx';
         // append inline JS Script
