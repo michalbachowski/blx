@@ -4,14 +4,14 @@ namespace Blx\Plugin\Jb;
 class Gallery extends \Blx\Plugin {
 
     protected $mapping = array(
-        'dispatch.start' => 'init',
+        'dispatch.start' => 'start',
         'filter.response.normal' => 'inject'
     );
 
     protected $pattern = '!\[gallery\](.+?)\[\/gallery\]!s';
     protected $mine;
 
-    public function init() {
+    public function start() {
         require_once \Realms::data( 'kopalnia', 'realm_path' ) . 'app/class.mine.php';
         $this->mine = new \Mine();
     }
