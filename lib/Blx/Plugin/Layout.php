@@ -15,7 +15,10 @@ class Layout extends \Blx\Plugin {
         if ( !file_exists( $this->file ) ) {
             return $output;
         }
-        $layout = file_get_contents( $this->file );
+        $layout = $this->dispatcher->filter(
+            new \sfEvent( $this, 'filter.response.normal'),
+            file_get_contents( $this->file )
+        )->getReturnValue();
         return str_replace( $this->tag, $output, $layout );
     }
 }
