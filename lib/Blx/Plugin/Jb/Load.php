@@ -7,8 +7,10 @@ class Load extends \Blx\Plugin {
         'filter.output' => 'filter'
     );
     protected $realm;
+    protected $groups;
 
-    public function __construct( $realm=null ) {
+    public function __construct( $group=null, $realm=null ) {
+        $this->group = $group ?: 1532;
         $this->realm = $realm ?:  $_SERVER['X_REALM'];
     }
 
@@ -28,6 +30,9 @@ class Load extends \Blx\Plugin {
         // fix url pattern
         $util = $event->getSubject()->getUtil();
         $util->setUrlPattern( \Url::make( $util->getUrlPattern() ) );
+
+        // permissions
+        \JBPerm::set( 'perm.' . JB_REALM . '.post', new \JBPolicyGroup( $this->group ) );
     }
 
     public function filter( \sfEvent $event, $content ) {
