@@ -15,7 +15,7 @@ class Load extends \Blx\Plugin {
         $this->realm = $realm ?:  $_SERVER['X_REALM'];
     }
 
-    public function update( \sfEvent $event ) {
+    public function init() {
         // load core
         define( 'JB_REALM', $this->realm );
         define( 'JB_DEBUG', 1 );
@@ -29,8 +29,7 @@ class Load extends \Blx\Plugin {
         set_include_path( get_include_path() . PATH_SEPARATOR . JB_REALM_PATH . 'app' );
         
         // fix url pattern
-        $util = $event->getSubject()->getUtil();
-        $util->setUrlPattern( \Url::make( $util->getUrlPattern() ) );
+        $this->util->setUrlPattern( \Url::make( $this->util->getUrlPattern() ) );
 
         // permissions
         \JBPerm::set( 'perm.' . JB_REALM . '.post', new \JBPolicyGroup( $this->group ) );
