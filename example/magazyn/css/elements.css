@@ -103,9 +103,25 @@
                 font-size: 0.8em;
                 padding: 0;
             }
-            .news-more a:after {
-                content: " »";
+            .news-more {
+                clear: both;
             }
+                .news-more a:after {
+                    content: " »";
+                }
+            .news-text p {
+                clear: both;
+            }
+            .news-text a.with-image {
+                display: block;
+                margin: 0 auto;
+                padding: 0.5em;
+                width: 300px;
+                height: 300px;
+                text-decoration: none;
+                float: left;
+            }
+
         .news-list .news-archive-button {
             padding: 1em;
             height: 2em;
@@ -171,7 +187,7 @@
             line-height: 1.3em;
         }
             .board-topics dt {
-                height: 1.2em;
+                height: 1.3em;
             }
             .board-topics dd {
                 font-size: 0.8em;
@@ -246,9 +262,11 @@
                 margin-top: -2em;
                 left: 90%;
             }
+
     /* comments */
     .comments {
         padding: 0.5em;
+        clear: both;
     }
         .comments h3 {
         }

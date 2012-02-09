@@ -103,3 +103,9 @@ ul.xinha-horizontal-menu {
     .xinha-left-menu li {
         list-style-type: none;
     }
+a.with-image {
+    opacity: 0.6;
+}
+a.with-image:hover {
+    opacity: 1;
+}
