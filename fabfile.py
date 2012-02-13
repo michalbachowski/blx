@@ -108,6 +108,12 @@ def test_lighttpd_config(realm):
         'Checking if realm is set in lighttpd configuration',\
         'Add missing configuration to %s' % lighttpd_config_path)
 
+def test_admin_group(realm):
+    source_dir = realm_path(realm)
+    test_config('grep "$adminGroup = 1532;" %s' % source_dir,\
+        'Checking if admin group is set',\
+        'Update site`s administration group in %s/run.php' % source_dir)
+
 def test_generate_board_list(realm):
     path = '%s/pylib/pyapps/queue_proxy/handlers/generate_board_list.php' % \
         jaskinia_path
@@ -191,13 +197,7 @@ def test(realm):
     test_jbcore_realm_db_config(realm)
     test_lighttpd_config(realm)
     test_generate_board_list(realm)
-    # locale and site`s name
-    print yellow('INFO '), 'Update site`s name in run.php and locale/*'
-    # mine`s chamber
-    print yellow('INFO '), 'You may want to add mine`s chamber for new service'
-    print indent('Sample command: fab mine:%(r)s,"%(rc)s","%(r)s",GROUP_ID' % \
-            {'r': realm, 'rc': realm.capitalize()}, 6)
-    print indent('For more informations execute: fab -d mine', 6)
+    test_admin_group(realm)
 
 @task(default=True)
 def deploy(realm, group):
