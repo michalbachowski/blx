@@ -1,5 +1,10 @@
-body {
+html, body, div.dialog.panel {
     font-size: 14px;
+    color: #fff;
+    background-color: #111;
+}
+html.with-bg, html.with-bg body {
+    background-color: #212121;
 }
 @media (min-width: 1300px) {
     html, body {
@@ -12,3 +17,56 @@ body {
         font-size: 18px;
     }
 }
+
+form input,
+form textarea {
+    color: #fff;
+    background-color: #212121;
+}
+
+a {
+    color: #ceb67b;
+}
+
+#wrapper-main {
+    width: 90%;
+    margin: 4.5em auto 0;
+    position: relative;
+}
+    #breadcrumbs {
+        left: 25%;
+        margin-top: 2em;
+    }
+    #content,
+    #menu,
+    .board-topics {
+        background-color: #111;
+    }
+    #content {
+        width: 73%;
+        float: right;
+        min-height: 20em;
+        margin-top: 2em;
+        padding: 0.5em 1%;
+    }
+
+    #menu,
+    .board-topics {
+        width: 24%;
+        float: left;
+        margin-bottom: 1em;
+        overflow: hidden;
+    }
+
+    .board-topics {
+        padding: 0.5em 1%;
+        width: 22%;
+    }
+
+    footer {
+        margin-left: 25%;
+        clear: both;
+    }
+        footer p {
+            padding-left: 0;
+        }
