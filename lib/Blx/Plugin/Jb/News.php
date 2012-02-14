@@ -20,8 +20,13 @@ class News extends \Blx\Plugin {
     protected $latestNewsNumber = 5;
     protected $util;
 
-    public function __construct( $latestNewsNumber = 5 ) {
+    public function __construct( $latestNewsNumber = 5, $realm = null ) {
         $this->latestNewsNumber = (int) $latestNewsNumber;
+        $this->realm = $realm;
+    }
+
+    public function init() {
+        $this->realm = $this->realm ?: JB_REALM;
     }
 
     public function start( \sfEvent $event ) {
@@ -57,7 +62,7 @@ class News extends \Blx\Plugin {
     }
 
     protected function injectCallback( $matches ) {
-        return $this->fetchList( $event );
+        return $this->fetchList( isset( $matches[1] ) ? $matches[1] : null );
     }
 
     public function inject( \sfEvent $event, $content ) {
@@ -93,9 +98,9 @@ class News extends \Blx\Plugin {
         return true;
     }
 
-    protected function fetchList() {
+    protected function fetchList( $realm = null ) {
         return $this->displayList(
-            \JBNews::getLatest( $this->latestNewsNumber ),
+            \JBNews::getLatest( $this->latestNewsNumber, $this->realm ),
             null,
             $this->displayArchiveButton()
         );
@@ -195,15 +200,12 @@ class News extends \Blx\Plugin {
         if ( !isset( $this->news[$id] ) ) {
             try {
                 $this->news[$id] = \JBNews::getById( $id );
-                // remove news from other realm
-                if ( $this->news[$id]['news_realm'] != JB_REALM ) {
-                    return;
-                }
             } catch( \JBNewsNotFoundException $e ) {
                 $this->news[$id] = null;
             }
         }
-        if ( $this->news[$id]['news_realm'] != JB_REALM ) {
+        // remove news from other realm
+        if ( $this->news[$id]['news_realm'] != $this->realm ) {
             return;
         }
         return $this->news[$id];
