@@ -81,13 +81,13 @@ def magazyn(source_dir, dest_dir):
             return
     local('ln -s %s %s' % (source_path, dest_path))
 
-def test_config(cmd, msg, hint):
+def test_config(cmd, msg, hint, expect_fail=False):
     response = green('OK   ')
     hint_tmp = ''
     with settings(hide('running', 'warnings', 'stdout', 'stderr'),\
         warn_only=True):
         result = local(cmd, capture=True)
-        if result.failed:
+        if result.failed != expect_fail:
             response = red('ERROR')
             hint_tmp = '\n' + indent('HINT: %s' % hint, 6)
     print response, msg, hint_tmp
@@ -108,11 +108,12 @@ def test_lighttpd_config(realm):
         'Checking if realm is set in lighttpd configuration',\
         'Add missing configuration to %s' % lighttpd_config_path)
 
-def test_admin_group(realm):
-    source_dir = realm_path(realm)
+def test_admin_group(dest_dir):
+    source_dir = '%s/run.php' % realm_path(dest_dir)
     test_config('grep "$adminGroup = 1532;" %s' % source_dir,\
         'Checking if admin group is set',\
-        'Update site`s administration group in %s/run.php' % source_dir)
+        'Update site`s administration group in %s' % source_dir,
+        expect_fail=True)
 
 def test_generate_board_list(realm):
     path = '%s/pylib/pyapps/queue_proxy/handlers/generate_board_list.php' % \
@@ -187,7 +188,7 @@ def db(realm):
     db.connect().commit()
 
 @task
-def test(realm):
+def test(realm, dest_dir):
     """
     Tests verious configuration files (realms, dbpass, lighttpd)
 
@@ -197,7 +198,7 @@ def test(realm):
     test_jbcore_realm_db_config(realm)
     test_lighttpd_config(realm)
     test_generate_board_list(realm)
-    test_admin_group(realm)
+    test_admin_group(dest_dir)
 
 @task(default=True)
 def deploy(realm, group):
@@ -208,4 +209,4 @@ def deploy(realm, group):
     magazyn(realm, realm)
     db(realm)
     mine(realm, realm.capitalize(), realm, group)
-    test(realm)
+    test(realm, realm)
