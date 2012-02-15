@@ -18,7 +18,9 @@ $(document).ready(function() {
             "SmartReplace",
             "Stylist",
             "Linker",
-            "TableOperations"
+            "TableOperations",
+            "DefinitionList",
+            "InsertSnippet"
 		];
         if(!Xinha.loadPlugins(xinha_plugins, xinha_init)) {
             return;
@@ -33,19 +35,19 @@ $(document).ready(function() {
         xinha_config = new Xinha.Config();
 		xinha_config.toolbar =
         [
-            ["popupeditor"],
+            ["popupeditor", "htmlmode"],
             ["separator","formatblock","bold","italic","underline","strikethrough"],
             //["separator","forecolor","hilitecolor","textindicator"],
             ["separator","subscript","superscript"],
             
             ["linebreak","separator","justifyleft","justifycenter","justifyright","justifyfull"],
-            ["separator","insertorderedlist","insertunorderedlist","outdent","indent"],
+            ["separator","insertorderedlist","insertunorderedlist"],
             ["separator","inserthorizontalrule","createlink","insertimage","inserttable"],
             
             ["linebreak","separator","undo","redo","selectall","print"],
             (Xinha.is_gecko?[]:["cut","copy","paste","overwrite","saveas"]),
-            ["separator","killword","clearfonts","removeformat","toggleborders","splitblock","lefttoright","righttoleft"],
-            ["separator","htmlmode","showhelp","about"]
+            ["separator","killword","clearfonts","removeformat","toggleborders","splitblock","lefttoright","righttoleft"]//,
+//            ["separator","htmlmode","showhelp","about"]
         ];
         
         /*
