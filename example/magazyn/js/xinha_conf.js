@@ -20,7 +20,7 @@ $(document).ready(function() {
             "Linker",
             "TableOperations",
             "DefinitionList",
-            "InsertSnippet"
+            "InsertSnippet2"
 		];
         if(!Xinha.loadPlugins(xinha_plugins, xinha_init)) {
             return;
@@ -33,6 +33,7 @@ $(document).ready(function() {
 		});
 		xinha_editors =  tmpEditors;
         xinha_config = new Xinha.Config();
+        xinha_config.InsertSnippet2.snippets = "/snippets.xml";
 		xinha_config.toolbar =
         [
             ["popupeditor", "htmlmode"],
