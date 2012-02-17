@@ -38,17 +38,13 @@ $(document).ready(function() {
         [
             ["popupeditor", "htmlmode"],
             ["separator","formatblock","bold","italic","underline","strikethrough"],
-            //["separator","forecolor","hilitecolor","textindicator"],
             ["separator","subscript","superscript"],
-            
-            ["linebreak","separator","justifyleft","justifycenter","justifyright","justifyfull"],
+            ["separator","justifyleft","justifycenter","justifyright","justifyfull"],
             ["separator","insertorderedlist","insertunorderedlist"],
             ["separator","inserthorizontalrule","createlink","insertimage","inserttable"],
-            
-            ["linebreak","separator","undo","redo","selectall","print"],
+            ["separator","undo","redo","selectall"],
             (Xinha.is_gecko?[]:["cut","copy","paste","overwrite","saveas"]),
-            ["separator","killword","clearfonts","removeformat","toggleborders","splitblock","lefttoright","righttoleft"]//,
-//            ["separator","htmlmode","showhelp","about"]
+            ["separator","killword","clearfonts","removeformat","toggleborders","splitblock"]
         ];
         
         /*
@@ -78,14 +74,22 @@ $(document).ready(function() {
         xinha_config.Linker.backend = '/scan.php';
 		xinha_config.showLoading = false;
 		xinha_config.statusBar = false;
-        xinha_config.stripBaseHref = true;
+        xinha_config.flowToolbars = false;
+        xinha_config.mozParaHandler = 'best';
+//        xinha_config.height = '800px';
+//        xinha_config.width = '100%';
         xinha_config.pageStyleSheets = [
             "http://magazyn.jaskiniabehemota.net/common/css/reset.css",
             "http://magazyn.jaskiniabehemota.net/blx/css/editor.css",
             "http://magazyn.jaskiniabehemota.net/blx/css/content.css",
             "http://magazyn.jaskiniabehemota.net/" + siteRealm + "/css/layout.css"
         ];
+        xinha_config.baseURL = document.location.protocol + "//" + document.location.host;
+        xinha_config.getHtmlMethod = "TransformInnerHTML";
+        xinha_config.htmlRemoveTags = /span|font/;
+        xinha_config.autofocus = "content";
 
+        // styilist
         xinha_config.stylistLoadStyles('ul.xinha-horizontal-menu { zoom: 1 }', {'ul.xinha-horizontal-menu' : 'Horizontal menu'});
         xinha_config.stylistLoadStyles('p.xinha-dark-box {}', {'p.xinha-dark-box' : 'Dark box'});
         xinha_config.stylistLoadStyles('a.with-image {}', {'a.with-image' : 'Anchor with image'});
@@ -94,12 +98,6 @@ $(document).ready(function() {
         xinha_config.stylistLoadStyles('ul.xinha-left-menu {}', {'ul.xinha-left-menu' : 'Menu on the left'});
 
 		xinha_editors   = Xinha.makeEditors(xinha_editors, xinha_config, xinha_plugins);
-		$("textarea").each(function() {
-			if(this.className!='no-xinha') {
-//                xinha_editors[this.id].config.height = '800px';
-//                xinha_editors[this.id].config.width = '100%';
-			}
-		});
 		Xinha.startEditors(xinha_editors);
     };
 	Xinha._addEvent(window,'load', xinha_init); // this executes the xinha_init function on page load
