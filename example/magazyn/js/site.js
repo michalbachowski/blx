@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    // Gallery
+    jbLightbox(".gallery a");
+
     jbUser( function( user ) {
         if ( user.id == -1 ) {
             return;
