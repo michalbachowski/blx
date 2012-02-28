@@ -287,12 +287,14 @@
             .comments article .comment-author {
                 padding-left: 1em;
             }
-                .comments article .comment-author img {
-                   max-width: 4em;
-                   max-height: 4em;
-                   margin: -1.5em 0 0 -4.5em;
-                   opacity: 0.6;
+                .comments article .comment-author-data {
+                    margin: -1.5em 0px 0px -4.5em;
                 }
-                .comments article:hover .comment-author img {
-                    opacity: 1;
-                }
+                    .comments article .comment-author img {
+                       max-width: 4em;
+                       max-height: 4em;
+                       opacity: 0.6;
+                    }
+                    .comments article:hover .comment-author img {
+                        opacity: 1;
+                    }
