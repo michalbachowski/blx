@@ -43,7 +43,7 @@ function prepareList( array $tree, array $desc, $base = '/' ) {
         $tmpUrl = $base . $part;
         if ( isset( $desc[$tmpUrl] ) ) {
             $title = JBSanitize::html( $desc[$tmpUrl]['title'] );
-            $url = $desc[$tmpUrl]['url'];
+            $url = '/' . ltrim( $desc[$tmpUrl]['url'], '/' );
         } else {
             $title = $part;
             $url = $tmpUrl . '.html';
