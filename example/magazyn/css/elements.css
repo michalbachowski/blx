@@ -298,3 +298,35 @@
                     .comments article:hover .comment-author img {
                         opacity: 1;
                     }
+
+    /* gallery */
+    .gallery {
+        overflow: hidden;
+    }
+        .gallery figure {
+            padding: 0 5px;
+            margin: 0.3em;
+            float: left;
+            height: 130px;
+            width: 100px;
+        }
+            .gallery figure a {
+                width: 100px;
+                height: 100px;
+                display: block;
+                opacity: 0.5;
+            }
+            .gallery figure a:hover {
+                opacity: 1;
+            }
+                .gallery figure img {
+                    width: 100px;
+                    height: 100px;
+                }
+            .gallery figcaption {
+                padding: 2px 2px 0;
+                height: 25px;
+                line-height: 20px;
+                overflow: hidden;
+                font-size: 0.9em;
+            }
