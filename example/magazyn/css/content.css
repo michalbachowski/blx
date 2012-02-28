@@ -1,6 +1,9 @@
 body {
     line-height: 1.7em;
 }
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Georgia", "Times New Roman", "Helvetica", "Arial", serif;
+}
 h2 {
     font-size: 1.7em;
 }
