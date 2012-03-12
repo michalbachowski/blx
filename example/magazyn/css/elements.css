@@ -201,6 +201,7 @@
     /* menu, and menu-horizontal */
     #menu {
         z-index: 500;
+        position: relative;
     }
     #menu .xinha-horizontal-menu {
         height: auto;
@@ -220,6 +221,7 @@
             margin: 0;
             min-height: 2em;
             line-height: 2em;
+            list-style-type: none;
         }
         #menu li {
             padding: 0 0.5em;
@@ -231,6 +233,8 @@
             #menu li ul,
             #menu li:hover ul ul {
                 display: none;
+                left: 95%;
+                margin-top: -2em;
             }
             #menu li:hover ul,
             #menu li:hover li:hover ul,

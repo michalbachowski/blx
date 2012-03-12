@@ -39,8 +39,14 @@ a {
     }
     #content,
     #menu,
-    .board-topics {
+    .board-topics,
+    #menu ul,
+    #menu li:hover ul {
         background-color: #111;
+        border: 1px solid #555;
+    }
+    #menu {
+        border-width: 0;
     }
     #content {
         width: 73%;
@@ -55,12 +61,20 @@ a {
         width: 24%;
         float: left;
         margin-bottom: 1em;
-        overflow: hidden;
+    }
+
+    #menu ul ul {
+        min-width: 50%;
+        border: 1px solid #555;
+    }
+    #menu li:hover {
+        background-color: #1c1c1c;
     }
 
     .board-topics {
         padding: 0.5em 1%;
         width: 22%;
+        overflow: hidden;
     }
 
     footer {
