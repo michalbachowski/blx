@@ -10,7 +10,6 @@ class Comments extends \Blx\Plugin {
     protected $pattern = '!\[comments\:(?P<item>[a-zA-Z0-9_]+)\:(?P<id>[0-9]+)(?:\:(?P<realm>[a-zA-Z0-9_]+))?\]!';
     
     public function inject( \sfEvent $event, $content ) {
-        $tmp = '!\[comments\:(.+)\:(.+)\:(.+)]!';
         return preg_replace_callback(
             $this->pattern,
             array( $this, 'injectCallback' ),
