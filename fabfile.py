@@ -114,6 +114,7 @@ def test_admin_group(dest_dir):
         'Checking if admin group is set',\
         'Update site`s administration group in %s' % source_dir,
         expect_fail=True)
+    print indent('HINT: check if proper group is set in %s' % source_dir, 6)
 
 def test_generate_board_list(realm):
     path = '%s/pylib/pyapps/queue_proxy/handlers/generate_board_list.php' % \
