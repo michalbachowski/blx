@@ -208,5 +208,9 @@ def deploy(realm, group):
     pliki(realm)
     magazyn(realm, realm)
     db(realm)
-    mine(realm, realm.capitalize(), realm, group)
+    print yellow('INFO '), 'Run command  mine:%s,"%s",%s,%s' % \
+        (realm, realm.capitalize(), realm, group)
+    # following step requres re-setting JB_REALM
+    # which is impossible and script fails
+    #mine(realm, realm.capitalize(), realm, group)
     test(realm, realm)
