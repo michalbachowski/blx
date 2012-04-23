@@ -4,6 +4,7 @@ namespace Blx\Plugin\Jb;
 class Acl extends \Blx\Plugin {
     protected $mapping = array(
         'filter.url' => 'filter',
+        'acl.check.editable.form' => 'verify',
     );
     const ALLOW = true;
     const DENY = false;
@@ -27,6 +28,14 @@ class Acl extends \Blx\Plugin {
             _( 'You are not allowed to acces this page.' )
         );
     }
+
+    public function verify( \sfEvent $event ) {
+        $action = substr( $event->getName(), 10 );
+        $event->setReturnValue(
+            \JBPerm::verify( $this, $action, array( 'event' => $event['event'] ) ) );
+        return true;
+    }
+
     protected function check( \sfEvent $event, $url ) {
         $args = array( 'event' => $event, 'url' => $url );
         $allowGlobal = \JBPerm::verify( $this, 'perm.' . JB_REALM . $this->mode, $args );

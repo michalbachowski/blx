@@ -33,6 +33,7 @@ class Load extends \Blx\Plugin {
 
         // permissions
         \JBPerm::set( 'perm.' . JB_REALM . '.post', new \JBPolicyGroup( $this->group ) );
+        \JBPerm::set( 'editable.form', new \JBPolicyGroup( $this->group ) );
     }
 
     public function filter( \sfEvent $event, $content ) {

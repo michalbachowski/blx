@@ -69,6 +69,15 @@ EOF;
         if ( !isset( $event['arguments']['edit'] ) ) {
             return false;
         }
+        // verify permissions
+        $permEvent = $event->getSubject()->getDispatcher()->notifyUntil(
+            new \sfEvent( $this, 'acl.check.editable.form',
+                array( 'event' => $event ) ) );
+        if ( $permEvent->isProcessed() && !$permEvent->getReturnValue() ) {
+            throw new \Blx\ForbiddenError(
+                _( 'You are not allowed to acces this page.' )
+            );
+        }
         $this->insideLoop = true;
         $event = $event->getSubject()->getDispatcher()->notifyUntil( $event );
         # no response - error
