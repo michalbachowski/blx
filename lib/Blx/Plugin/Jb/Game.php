@@ -4,7 +4,7 @@ namespace Blx\Plugin\Jb;
 class Game extends \Blx\Plugin {
 
     protected $mapping = array(
-        'filter.output' => 'inject'
+        'filter.response.normal' => 'inject'
     );
 
     protected $groups = array(
