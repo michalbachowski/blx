@@ -204,15 +204,17 @@ def test(realm, dest_dir):
 
 @task(default=True)
 def deploy(realm, group):
+    """
+    Performs complete deployment of application
+
+    @param  realm
+    @param  group
+    """
     copy(realm)
     remove_blx_common_files(realm)
     lang(realm, realm)
     pliki(realm)
     magazyn(realm, realm)
+    mine(realm, realm.capitalize(), realm, group)
     db(realm)
-    print yellow('INFO '), 'Run command  mine:%s,"%s",%s,%s' % \
-        (realm, realm.capitalize(), realm, group)
-    # following step requres re-setting JB_REALM
-    # which is impossible and script fails
-    #mine(realm, realm.capitalize(), realm, group)
     test(realm, realm)
