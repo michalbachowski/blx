@@ -193,7 +193,8 @@ def test(realm, dest_dir):
     """
     Tests verious configuration files (realms, dbpass, lighttpd)
 
-    @param  string  realm   realm to check
+    @param  string  realm       realm to check
+    @param  string  dest_dir    destination directory of service
     """
     test_jbcore_realm_config(realm)
     test_jbcore_realm_db_config(realm)
