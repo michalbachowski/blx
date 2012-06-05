@@ -52,6 +52,9 @@ class DbStorage extends \Blx\Plugin {
     }
 
     public function post( \sfEvent $event ) {
+        if ( !isset( $event['arguments']['content'] ) ) {
+            return false;
+        }
         $this->storeIntoDb( $event );
         $event->getSubject()->redirectToPage( $event['url'] );
     }
