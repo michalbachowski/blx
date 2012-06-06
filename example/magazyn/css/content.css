@@ -27,6 +27,13 @@ p, li, td, a, span, strong {
 p:first-child {
     padding-top: .5em;
 }
+p.info {
+    background-color: rgba(34,147,247,0.5);
+    border: 1px solid #fff;
+    width: 50%;
+    margin: 0.5em auto 1em;
+
+}
 p.error {
     background-color: rgba(101,0,0,0.5);
     border: 1px solid #ab0000;
