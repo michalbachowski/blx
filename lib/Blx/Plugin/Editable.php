@@ -75,7 +75,7 @@ EOF;
                 array( 'event' => $event ) ) );
         if ( $permEvent->isProcessed() && !$permEvent->getReturnValue() ) {
             throw new \Blx\ForbiddenError(
-                _( 'You are not allowed to acces this page.' )
+                \Blx\Util::_( 'You are not allowed to acces this page.' )
             );
         }
         $this->insideLoop = true;

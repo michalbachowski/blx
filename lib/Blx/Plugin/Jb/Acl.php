@@ -25,7 +25,7 @@ class Acl extends \Blx\Plugin {
         }
         // access denied
         throw new \Blx\ForbiddenError(
-            _( 'You are not allowed to acces this page.' )
+            \Blx\Util::_( 'You are not allowed to acces this page.' )
         );
     }
 
