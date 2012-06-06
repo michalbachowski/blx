@@ -21,51 +21,47 @@ class DummyForm extends \Jpl_Form_Factory {
 class Form extends \Blx\Plugin {
 
     protected $mapping = array(
-        'filter.response.normal' => 'replace',
         'handle.get' => 'get',
         'handle.post' => 'post',
+        'metadata.get' => 'metadata',
     );
 
     protected $forms = array();
     protected $callbacks = array();
+    protected $metadata = array();
     protected $view;
-    protected $pattern = '!\[form\:(?P<url>[a-zA-Z0-9\\/.\-_]+)\]!';
 
-    public function __construct( $appDir, $url, $callback, \Jpl_Form_Factory $obj = null ) {
+    public function __construct( $appDir, $url, $title, $callback, \Jpl_Form_Factory $obj = null ) {
         \Jpl_Form_Factory::setConfigDirectory( 'forms/' );
         \Jpl_Form_Factory::setAppPath( $appDir );
-        $this->setForm( $url, $callback, $obj );
+        $this->setForm( $url, $title, $callback, $obj );
     }
 
-    public function setForm( $url, $callback, \Jpl_Form_Factory $obj = null ) { 
+    public function getForm( $url ) {
+        return $this->forms[$url];
+    }
+
+    public function setForm( $url, $title, $callback, \Jpl_Form_Factory $obj = null ) { 
         if ( null === $obj || !$obj instanceof \Jpl_Form_Factory ) {
             $obj = new DummyForm( $url );
         }
         $this->forms[$url] = $obj;
         $this->callbacks[$url] = $callback;
+        $this->metadata[$url] = $title;
         return $this;
-    }
-
-    public function replace( \sfEvent $event, $content ) {
-        return preg_replace_callback(
-            $this->pattern,
-            array( $this, 'replaceCallback' ),
-            $content
-        );
-    }
-
-    protected function replaceCallback( $matches ) {
-        $url = $matches['url'];
-        if ( !isset( $this->forms[$url] ) ) {
-            return '';
-        }
-        return $this->displayForm( $url );
     }
 
     public function displayForm( $url ) {
         return $this->forms[$url]->getForm()->render( $this->view() );
     }
     
+    public function metadata( \sfEvent $event ) {
+        if ( !isset( $this->metadata[$event['url']] ) ) {
+            return false;
+        }
+        $event->setReturnValue( $this->metadata[$event['url']] );
+        return true;
+    }
     public function get( \sfEvent $event ) {
         if ( !isset( $this->forms[$event['url']] ) ) {
             return false;
