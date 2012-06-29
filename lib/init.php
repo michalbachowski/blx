@@ -14,7 +14,7 @@ $request = new Blx\Request( $util );
 $request->addPlugin( new Blx\Plugin\DefaultUrl( 'index.html' ) )
     ->addPlugin( new Blx\Plugin\Layout( $appDir . '/template/default.html' ) )
     ->addPlugin( new Blx\Plugin\Jb\Copyright() )
-    ->addPlugin( new Blx\Plugin\Jb\Load( $adminGroup ) )
+    ->addPlugin( new Blx\Plugin\Jb\Load( isset( $adminGroup ) ? $adminGroup : null ) )
     ->addPlugin( new Blx\Plugin\Jb\RemoveDefaultLanguage() ) 
     ->addPlugin( new Blx\Plugin\Jb\Permission() )
 //    ->addPlugin( new Blx\Plugin\Jb\FixBetaUrl() )
@@ -36,7 +36,6 @@ $request->addPlugin( new Blx\Plugin\DefaultUrl( 'index.html' ) )
     ->addPlugin( new Blx\Plugin\Error403() )
     ->addPlugin( new Blx\Plugin\Error404() )
     ->addPlugin( new Blx\Plugin\Jb\Ui() )
-    ->addPlugin( new Blx\Plugin\Jb\Xinha() )
     ->addPlugin( new Blx\Plugin\Jb\Js( 'js/site.js', 'blx' ) )
     ->addPlugin( new Blx\Plugin\Jb\Css( 'css/form.css', 'blx' ) )
     ->addPlugin( new Blx\Plugin\Jb\Css( 'css/editor.css', 'blx' ) )
@@ -44,3 +43,8 @@ $request->addPlugin( new Blx\Plugin\DefaultUrl( 'index.html' ) )
     ->addPlugin( new Blx\Plugin\Jb\Css( 'css/elements.css', 'blx' ) )
     ->addPlugin( new Blx\Plugin\Jb\Css( 'css/layout.css' ) )
     ->addPlugin( new Blx\Plugin\Display() );
+
+if ( !isset( $editor ) || $editor !== '' ) {
+    $request->addPlugin( $editor ?: new Blx\Plugin\Jb\Xinha() );
+}
+
