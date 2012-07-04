@@ -11,7 +11,7 @@ class Load extends \Blx\Plugin {
     protected $groups;
 
     public function __construct( $group=null, $realm=null ) {
-        $this->group = $group ?: 1532;
+        $this->group = $group;
         $this->realm = $realm ?:  $_SERVER['X_REALM'];
     }
 
@@ -32,8 +32,14 @@ class Load extends \Blx\Plugin {
         $this->util->setUrlPattern( \Url::make( $this->util->getUrlPattern() ) );
 
         // permissions
-        \JBPerm::set( 'perm.' . JB_REALM . '.post', new \JBPolicyGroup( $this->group ) );
-        \JBPerm::set( 'editable.form', new \JBPolicyGroup( $this->group ) );
+        if ( $this->group ) {
+            $group = new \JBPolicyGroup( $this->group );
+            \JBPerm::set( 'perm.' . JB_REALM . '.post', $group );
+            \JBPerm::set( 'editable.form', $group );
+        }
+        $editors = new \JBPolicyAchievement( 4 );
+        \JBPerm::set( 'perm.' . JB_REALM . '.post', $editors );
+        \JBPerm::set( 'editable.form', $editors );
     }
 
     public function filter( \sfEvent $event, $content ) {
