@@ -81,6 +81,9 @@ table.with-full-border td {
     td, th {
         padding: 0.5em;
     }
+    td.info {
+        text-align:center;
+    }
 
 .xinha-dark-box {
     background-color: rgba(0,0,0,0.4);
