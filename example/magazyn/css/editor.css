@@ -11,17 +11,17 @@
             display: none;
         }
         #form-edit div#box-title input {
-            width: 100%;
+            width: 94%;
             height: 2em;
             padding: 0.5em;
             line-height: 2em;
             font-size: 2em;
         }
         #form-edit textarea {
-            width: 100%;
+            width: 94%;
         }
         #form-edit div#box-content textarea {
-            width: 100%;
+            width: 94%;
             height: 650px;
         }
 .dialog th,
