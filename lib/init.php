@@ -4,6 +4,9 @@ require 'sf/sfEventDispatcher.php';
 
 spl_autoload_register( array( new Blx\Loader(), 'autoload' ) );
 
+# add appDir to include path
+set_include_path( get_include_path() . PATH_SEPARATOR . $appDir . '/app' );
+
 # prepare utility class
 $util = new Blx\Util();
 
