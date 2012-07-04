@@ -38,6 +38,9 @@ class Form extends \Blx\Plugin {
     }
 
     public function getForm( $url ) {
+        if ( !isset( $this->forms[$url] ) ) {
+            throw new RuntimeException('Missing form');
+        }
         return $this->forms[$url];
     }
 
@@ -47,35 +50,36 @@ class Form extends \Blx\Plugin {
         }
         $this->forms[$url] = $obj;
         $this->callbacks[$url] = $callback;
-        $this->metadata[$url] = $title;
+        $this->metadata[$url] = array('title' => $title);
         return $this;
     }
 
     public function displayForm( $url ) {
-        return $this->forms[$url]->getForm()->render( $this->view() );
+        return $this->getForm($url)->getForm()->render( $this->view() );
     }
     
     public function metadata( \sfEvent $event ) {
-        if ( !isset( $this->metadata[$event['url']] ) ) {
+        if ( !isset( $this->metadata[$event['url']][$event['key']] ) ) {
             return false;
         }
-        $event->setReturnValue( $this->metadata[$event['url']] );
+        $event->setReturnValue( $this->metadata[$event['url']][$event['key']] );
         return true;
     }
     public function get( \sfEvent $event ) {
-        if ( !isset( $this->forms[$event['url']] ) ) {
+        try {
+            $event->setReturnValue( $this->displayForm( $event['url'] ) );
+        } catch( RuntimeException $e ) {
             return false;
         }
-        $event->setReturnValue( $this->displayForm( $event['url'] ) );
         return true;
     }
 
     public function post( \sfEvent $event ) {
-        if ( !isset( $this->forms[$event['url']] ) ) {
+        try {
+            $form = $this->getForm($event['url'])->getForm();
+        } catch( RuntimeException $e ) {
             return false;
         }
-        $form = $this->forms[$event['url']]->getForm();
-
         if ( $form->isValid( $event['arguments'] ) ) {
             $event->setReturnValue( $this->executeCallback( $event ) );
         } else {
