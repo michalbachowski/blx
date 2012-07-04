@@ -94,7 +94,8 @@ class SimpleGrid extends \Blx\Plugin {
     protected function generateBody() {
         $data = $this->getData();
         if ( !$data ) {
-            return sprintf( '<td>%s</td>', _('No data found') );
+            $colspan = count( $this->getColumnHeaders() ) ?: 1;
+            return sprintf( '<td colspan="%u" class="info">%s</td>', $colspan, _('No data found') );
         }
         return array_reduce(
             array_map(
