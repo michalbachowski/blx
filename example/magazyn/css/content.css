@@ -19,7 +19,7 @@ a:hover {
     text-decoration: underline;
 }
 p {
-    padding: 0 1em .5em;
+    padding: .5em 1em;
 }
 p, li, td, a, span, strong {
     line-height: 1.6em;
@@ -69,12 +69,17 @@ ul, ol {
 table {
     margin: 1em auto;
 }
+
+    table th {
+        text-align: center;
+        font-weight: bold;
+    }
 table.with-border,
 table.with-full-border td {
     border-width: 1px;
 }
-    td {
-        padding: 0 0.5em;
+    td, th {
+        padding: 0.5em;
     }
 
 .xinha-dark-box {
