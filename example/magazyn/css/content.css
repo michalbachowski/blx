@@ -32,7 +32,7 @@ p.info {
     border: 1px solid #fff;
     width: 50%;
     margin: 0.5em auto 1em;
-
+    text-align: center;
 }
 p.error {
     background-color: rgba(101,0,0,0.5);
