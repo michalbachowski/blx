@@ -30,6 +30,7 @@ class Form extends \Blx\Plugin {
     protected $callbacks = array();
     protected $metadata = array();
     protected $view;
+    protected $formInitialized = false;
 
     public function __construct( $appDir, $url, $title, $callback, \Jpl_Form_Factory $obj = null ) {
         \Jpl_Form_Factory::setConfigDirectory( 'forms/' );
@@ -39,9 +40,16 @@ class Form extends \Blx\Plugin {
 
     public function getForm( $url ) {
         if ( !isset( $this->forms[$url] ) ) {
-            throw new RuntimeException('Missing form');
+            throw new \RuntimeException('Missing form');
+        }
+        if ( !$this->formInitialized ) {
+            $this->formInitialized = true;
+            $this->initForm( $this->forms[$url] );
         }
         return $this->forms[$url];
+    }
+
+    protected function initForm( \Jpl_Form_Factory $form ) {
     }
 
     public function setForm( $url, $title, $callback, \Jpl_Form_Factory $obj = null ) { 
@@ -68,7 +76,7 @@ class Form extends \Blx\Plugin {
     public function get( \sfEvent $event ) {
         try {
             $event->setReturnValue( $this->displayForm( $event['url'] ) );
-        } catch( RuntimeException $e ) {
+        } catch( \RuntimeException $e ) {
             return false;
         }
         return true;
@@ -77,7 +85,7 @@ class Form extends \Blx\Plugin {
     public function post( \sfEvent $event ) {
         try {
             $form = $this->getForm($event['url'])->getForm();
-        } catch( RuntimeException $e ) {
+        } catch( \RuntimeException $e ) {
             return false;
         }
         if ( $form->isValid( $event['arguments'] ) ) {
