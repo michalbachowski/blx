@@ -24,7 +24,8 @@ form {
             padding: 5px 0 5px 9px;
             margin-bottom: 3px;
         }
-            form .errors {
+            form .errors,
+            form .hint {
                 display: block;
                 clear: both;
                 margin-left: 20%;
