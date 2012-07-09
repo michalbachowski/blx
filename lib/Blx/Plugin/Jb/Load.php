@@ -18,7 +18,6 @@ class Load extends \Blx\Plugin {
     public function init() {
         // load core
         define( 'JB_REALM', $this->realm );
-        define( 'JB_DEBUG', 1 );
         require 'jbcore/jbcore.php';
 
         // load Blx translations
