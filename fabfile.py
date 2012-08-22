@@ -119,7 +119,7 @@ def test_admin_group(dest_dir):
 def test_generate_board_list(realm):
     path = '%s/pylib/pyapps/queue_proxy/handlers/generate_board_list.php' % \
         jaskinia_path
-    print yellow('INFO '), 'Checking if latest discissions are generated for '\
+    print yellow('INFO '), 'Checking if latest discussions are generated for '\
         + 'used board'
     print indent('HINT: check manually in %s' % path, 6);
 
