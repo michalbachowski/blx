@@ -1,5 +1,5 @@
 <?php
-$adminGroup = 1532;
+$adminGroup = 5140;
 $newsRealm = null; // NULL for default
 # $editor = ''; // to disable Xinha
 # $editor = new Blx\Plugin\Jb\Markup(); // to use markup editor (like on our board)
