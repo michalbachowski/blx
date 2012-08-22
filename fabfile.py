@@ -116,6 +116,15 @@ def test_admin_group(dest_dir):
         expect_fail=True)
     print indent('HINT: check if proper group is set in %s' % source_dir, 6)
 
+def test_realms_list(realm):
+    """
+    Checks whether realm is added to list of realms displayed on main page
+    """
+    source_dir = '/home/jaskinia/realms/heroes/app/realms.php'
+    test_config('grep "\'%s\'" %s' % (realm, source_dir),\
+        'Checking if realm is displayed on main page',\
+        'Add realm to list of realms displayed on main page in %s' % source_dir)
+
 def test_generate_board_list(realm):
     path = '%s/pylib/pyapps/queue_proxy/handlers/generate_board_list.php' % \
         jaskinia_path
@@ -201,6 +210,7 @@ def test(realm, dest_dir):
     test_lighttpd_config(realm)
     test_generate_board_list(realm)
     test_admin_group(dest_dir)
+    test_realms_list(realm)
 
 @task(default=True)
 def deploy(realm, group):
