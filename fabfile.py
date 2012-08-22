@@ -110,7 +110,7 @@ def test_lighttpd_config(realm):
 
 def test_admin_group(dest_dir):
     source_dir = '%s/run.php' % realm_path(dest_dir)
-    test_config('grep "$adminGroup = 1532;" %s' % source_dir,\
+    test_config('grep "$adminGroup = 5140;" %s' % source_dir,\
         'Checking if admin group is set',\
         'Update site`s administration group in %s' % source_dir,
         expect_fail=True)
