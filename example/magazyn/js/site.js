@@ -56,7 +56,6 @@ $(document).ready(function() {
                             height: 530,
                             width: 500,
                             beforeClose: function( event, ui ) {
-                                window.location.reload();
                             }
                         });
                 }
