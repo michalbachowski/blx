@@ -67,4 +67,4 @@
             }()));
         });
     });
-)(jQuery, document, window, jbLightbox, jbUser, jbLang, jbManageBar));
+}(jQuery, document, window, jbLightbox, jbUser, jbLang, jbManageBar));
