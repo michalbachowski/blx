@@ -1,16 +1,15 @@
 var _editor_url     = "/xinha/";
 var _editor_lang    = "pl";
 
-$(document).ready(function() {
-	var xinha_editors = null;
-	var xinha_init    = null;
-	var xinha_config  = null;
-	var xinha_plugins = null;
+$(document).ready(function () {
+    "use strict";
+	var xinha_editors = null,
+	    xinha_init    = null,
+	    xinha_config  = null,
+	    xinha_plugins = null;
 
-	xinha_init = function()
-	{
-		xinha_plugins = xinha_plugins ? xinha_plugins :
-		[
+	xinha_init = function () {
+		xinha_plugins = xinha_plugins || [
 			'CharacterMap',
 			'SuperClean',
 			'ExtendedFileManager',
@@ -22,29 +21,28 @@ $(document).ready(function() {
             "DefinitionList",
             "InsertSnippet2"
 		];
-        if(!Xinha.loadPlugins(xinha_plugins, xinha_init)) {
+        if (!Xinha.loadPlugins(xinha_plugins, xinha_init)) {
             return;
         }
 		var tmpEditors	= [];
-		$("textarea").each(function() {
-			if(this.className!='no-xinha') {
+		$("textarea").each(function () {
+			if(this.className!=='no-xinha') {
 				tmpEditors.push(this.id);
 			}
 		});
 		xinha_editors =  tmpEditors;
         xinha_config = new Xinha.Config();
         xinha_config.InsertSnippet2.snippets = "/snippets.xml";
-		xinha_config.toolbar =
-        [
+		xinha_config.toolbar = [
             ["popupeditor", "htmlmode"],
-            ["separator","formatblock","bold","italic","underline","strikethrough"],
-            ["separator","subscript","superscript"],
-            ["separator","justifyleft","justifycenter","justifyright","justifyfull"],
-            ["separator","insertorderedlist","insertunorderedlist"],
-            ["separator","inserthorizontalrule","createlink","insertimage","inserttable"],
-            ["separator","undo","redo","selectall"],
-            (Xinha.is_gecko?[]:["cut","copy","paste","overwrite","saveas"]),
-            ["separator","killword","clearfonts","removeformat","toggleborders","splitblock"]
+            ["separator", "formatblock", "bold", "italic", "underline", "strikethrough"],
+            ["separator", "subscript", "superscript"],
+            ["separator", "justifyleft", "justifycenter", "justifyright", "justifyfull"],
+            ["separator", "insertorderedlist", "insertunorderedlist"],
+            ["separator", "inserthorizontalrule", "createlink", "insertimage", "inserttable"],
+            ["separator", "undo", "redo", "selectall"],
+            (Xinha.is_gecko ? [] : ["cut", "copy", "paste", "overwrite", "saveas"]),
+            ["separator", "killword", "clearfonts", "removeformat", "toggleborders", "splitblock"]
         ];
         
         /*
@@ -61,8 +59,7 @@ $(document).ready(function() {
 			["separator","killword","clearfonts","removeformat","htmlmode","separator","about"],
 		//	["separator","htmlmode","showhelp","about"]
 		];*/
-		xinha_config.formatblock =
-		{
+		xinha_config.formatblock = {
 			"&mdash; format &mdash;"  : "",
 			"Heading 2": "h2",
 			"Heading 3": "h3",
