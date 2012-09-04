@@ -85,6 +85,13 @@ table.with-full-border td {
         text-align:center;
     }
 
+        table.xinha-slim-content p,
+        table.xinha-slim-content li,
+        table.xinha-slim-content h4 {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        
 .xinha-dark-box {
     background-color: rgba(0,0,0,0.4);
     width: 90%;
